@@ -13,8 +13,8 @@ const Pricing = () => {
   const plans = [
     {
       name: "Collar + App",
-      monthlyPrice: 20,
-      annualPrice: 199,
+      monthlyPrice: 25,
+      annualPrice: 20.75,
       features: [
         "Smart collar device",
         "Mobile app access",
@@ -35,8 +35,8 @@ const Pricing = () => {
     },
     {
       name: "Collar + App + Vet Portal",
-      monthlyPrice: 25,
-      annualPrice: 249,
+      monthlyPrice: 30,
+      annualPrice: 24.91,
       features: [
         "Smart collar device",
         "Mobile app access",
@@ -68,7 +68,7 @@ const Pricing = () => {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.6 }}f
             className="section-title"
           >
             Pricing
