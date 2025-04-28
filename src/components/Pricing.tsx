@@ -14,7 +14,7 @@ const Pricing = () => {
     {
       name: "Collar + App",
       monthlyPrice: 25,
-      annualPrice: 20.75,
+      annualPrice: 20,
       features: [
         "Smart collar device",
         "Mobile app access",
@@ -27,6 +27,7 @@ const Pricing = () => {
       ],
       notIncluded: [
         "Veterinarian portal access",
+        "Global LTE connectivity",
         "Extended 2-year warranty",
         "Premium health analytics",
         "Unlimited data storage",
@@ -34,9 +35,9 @@ const Pricing = () => {
       popular: false,
     },
     {
-      name: "Collar + App + Vet Portal",
-      monthlyPrice: 30,
-      annualPrice: 24.91,
+      name: "Collar + App + LTE",
+      monthlyPrice: 35,
+      annualPrice: 30,
       features: [
         "Smart collar device",
         "Mobile app access",
@@ -45,7 +46,7 @@ const Pricing = () => {
         "Activity tracking",
         "Sleep analysis",
         "Veterinarian portal access",
-        "Sharable health reports",
+        "Global LTE connectivity",
         "Extended 2-year warranty",
         "Premium health analytics",
         "Unlimited data storage",
@@ -68,7 +69,7 @@ const Pricing = () => {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6 }}f
+            transition={{ duration: 0.6 }}
             className="section-title"
           >
             Pricing
