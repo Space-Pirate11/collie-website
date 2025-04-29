@@ -26,7 +26,7 @@ const Header = () => {
         <a href="#" className="flex items-center"> {/* Removed space-x-2, adjust styling as needed */}
           <img 
             // Reference the logo directly from the public folder
-            src="/logo.svg" // <-- PATH RELATIVE TO PUBLIC FOLDER (use /your-logo-name.png etc.)
+            src="/real.svg" // <-- PATH RELATIVE TO PUBLIC FOLDER (use /your-logo-name.png etc.)
             alt="Collie Logo" // <-- CHANGE ALT TEXT
             className="h-8 w-auto" // <-- ADJUST HEIGHT/WIDTH as needed (e.g., h-8, h-10)
           />
