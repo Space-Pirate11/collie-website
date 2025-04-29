@@ -8,6 +8,7 @@ import Benefits from './components/Benefits';
 import Pricing from './components/Pricing';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
+import Contact from './components/Contact'; // Adjust the path if necessary
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Benefits />
         <Pricing />
         <FAQ />
+        <Contact />
       </main>
       <Footer />
     </div>
