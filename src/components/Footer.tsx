@@ -128,7 +128,7 @@ const Footer = () => {
                   </p>
                 )}
                 {googleAppsScriptUrl === 'https://script.google.com/macros/s/AKfycbx8avnNJds9aAt6nNk1U6rMkA2ZVO_2W7IZc2SN-7-TfyNcHYM7R0AolYOACShy4xnGNA/exec' && status !== 'submitting' && (
-                    <p className="text-xs text-yellow-500 mt-1">Note: Subscription endpoint not configured.</p>
+                    <p className="text-xs text-yellow-500 mt-1"></p>
                 )}
             </div>
              {/* Optional: Add the "No spam" note */}
@@ -148,26 +148,6 @@ const Footer = () => {
               <p className="text-gray-300 mb-6">
                 The AI-powered smart collar for continuous canine health monitoring.
               </p>
-            </div>
-
-            <div className="flex flex-col space-y-6">
-              <div>
-                <p className="text-gray-400 mb-2">Connect with us</p>
-                <div className="flex space-x-4">
-                  <a href="#" className="text-gray-400 hover:text-cyan-400 transition" aria-label="Instagram">
-                    <Instagram size={20} />
-                  </a>
-                  <a href="#" className="text-gray-400 hover:text-cyan-400 transition" aria-label="Twitter">
-                    <Twitter size={20} />
-                  </a>
-                  <a href="#" className="text-gray-400 hover:text-cyan-400 transition" aria-label="Facebook">
-                    <Facebook size={20} />
-                  </a>
-                  <a href="#" className="text-gray-400 hover:text-cyan-400 transition" aria-label="YouTube">
-                    <Youtube size={20} />
-                  </a>
-                </div>
-              </div>
             </div>
           </div>
            {/* --- End Right Column --- */}
