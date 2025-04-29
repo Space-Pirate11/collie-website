@@ -23,15 +23,17 @@ const Header = () => {
     >
       <div className="container-custom flex justify-between items-center">
         {/* --- Logo Section Changed --- */}
-        <a href="#" className="flex items-center"> {/* Removed space-x-2, adjust styling as needed */}
+        {/* Added span for text next to image */}
+        <a href="#" className="flex items-center"> {/* Ensure flex and items-center are present */}
           <img 
-            // Reference the logo directly from the public folder
-            src="/final.png" // <-- PATH RELATIVE TO PUBLIC FOLDER (use /your-logo-name.png etc.)
-            alt="Collie Logo" // <-- CHANGE ALT TEXT
-            className="h-8 w-auto" // <-- ADJUST HEIGHT/WIDTH as needed (e.g., h-8, h-10)
+            src="/final.png" 
+            alt="Collie Logo" 
+            className="h-8 w-auto" // Adjust height/width as needed
           />
-          {/* Optional: Add text next to the image if desired */}
-          {/* <span className="text-xl font-bold ml-2 text-cyan-400">Collie</span> */}
+          {/* Added text span */}
+          <span className="ml-2 text-xl font-bold text-cyan-400"> {/* Added ml-2 for spacing, adjust classes as needed */}
+            Collie 
+          </span>
         </a>
         {/* --- End Logo Section Change --- */}
         
