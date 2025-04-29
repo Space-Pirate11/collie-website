@@ -59,14 +59,14 @@ const Hero = () => {
               <div className="relative glass-card p-8 rounded-3xl max-w-sm mx-auto backdrop-blur-lg"> {/* Ensure glass-card styles are defined */}
                 {/* Dog Image */}
                 <img
-                  src="/Desktop/sni.png"
+                  src="/Users/pranavadya/Desktop/pranavCode/boltwebsite/collie-website/public/sni.png"
                   alt="Collie Smart Collar on a dog"
                   className="rounded-xl shadow-lg w-full object-cover aspect-square"
                   // Add an onerror handler for fallback
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.onerror = null; // Prevent infinite loop
-                    target.src='/Desktop/sni.png'; // Placeholder image
+                    target.src='/Users/pranavadya/Desktop/pranavCode/boltwebsite/collie-website/public/sni.png'; // Placeholder image
                    }}
                 />
                 {/* Card Footer */}
