@@ -75,8 +75,8 @@ const Hero = () => {
                     <h3 className="text-2xl font-bold">Collie</h3>
                     <p className="text-gray-400">Smart Health Collar</p>
                   </div>
-                  {/* Pre-Order Tag - Added whitespace-nowrap */}
-                  <span className="glass-card px-3 py-1 rounded-full text-sm font-medium bg-cyan-500/20 text-cyan-400 whitespace-nowrap"> {/* Added whitespace-nowrap */}
+                  {/* Pre-Order Tag - Added whitespace-nowrap and flex-shrink-0 */}
+                  <span className="glass-card px-3 py-1 rounded-full text-sm font-medium bg-cyan-500/20 text-cyan-400 whitespace-nowrap flex-shrink-0"> {/* Added flex-shrink-0 */}
                     Pre-Orders Open Soon
                   </span>
                 </div>
