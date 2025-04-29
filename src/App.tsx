@@ -22,9 +22,9 @@ function App() {
         <Benefits />
         <Pricing />
         <FAQ />
-        <Contact />
       </main>
       <Footer />
+      <Contact />
     </div>
   );
 }
