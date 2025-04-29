@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Activity } from 'lucide-react';
+// No need to import Activity unless used elsewhere
+// No need to import the logo image file
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -21,10 +22,18 @@ const Header = () => {
       }`}
     >
       <div className="container-custom flex justify-between items-center">
-        <a href="#" className="flex items-center space-x-2 text-cyan-400">
-          <Activity size={28} strokeWidth={1.5} />
-          <span className="text-xl font-bold">Collie</span>
+        {/* --- Logo Section Changed --- */}
+        <a href="#" className="flex items-center"> {/* Removed space-x-2, adjust styling as needed */}
+          <img 
+            // Reference the logo directly from the public folder
+            src="/logo.svg" // <-- PATH RELATIVE TO PUBLIC FOLDER (use /your-logo-name.png etc.)
+            alt="Collie Logo" // <-- CHANGE ALT TEXT
+            className="h-8 w-auto" // <-- ADJUST HEIGHT/WIDTH as needed (e.g., h-8, h-10)
+          />
+          {/* Optional: Add text next to the image if desired */}
+          {/* <span className="text-xl font-bold ml-2 text-cyan-400">Collie</span> */}
         </a>
+        {/* --- End Logo Section Change --- */}
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-8">
@@ -45,7 +54,7 @@ const Header = () => {
           className="md:hidden text-white focus:outline-none"
           aria-label="Toggle menu"
         >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             {isMobileMenuOpen ? (
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             ) : (
@@ -58,7 +67,7 @@ const Header = () => {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden bg-charcoal/95 backdrop-blur-md absolute w-full">
-          <div className="container-custom py-4 flex flex-col space-y-4">
+           <div className="container-custom py-4 flex flex-col space-y-4">
             <a href="#how-it-works" className="text-gray-300 hover:text-white transition py-2 px-4 rounded hover:bg-white/5" onClick={() => setIsMobileMenuOpen(false)}>How It Works</a>
             <a href="#benefits" className="text-gray-300 hover:text-white transition py-2 px-4 rounded hover:bg-white/5" onClick={() => setIsMobileMenuOpen(false)}>Benefits</a>
             <a href="#pricing" className="text-gray-300 hover:text-white transition py-2 px-4 rounded hover:bg-white/5" onClick={() => setIsMobileMenuOpen(false)}>Pricing</a>
