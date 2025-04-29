@@ -165,7 +165,7 @@ const Pricing = () => {
                       : "bg-white/10 text-white hover:bg-white/20"
                   }`}
                 >
-                  Pre-order Now
+                  Pre-Orders Open Soon
                 </button>
                 
                 <div>
