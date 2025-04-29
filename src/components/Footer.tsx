@@ -154,16 +154,6 @@ const Footer = () => {
         </div>
 
         {/* --- Footer Bottom (Unchanged) --- */}
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <div className="text-sm text-gray-400 mb-4 md:mb-0">
-            &copy; {currentYear} Collie Health Technologies. All rights reserved.
-          </div>
-          <div className="flex flex-wrap justify-center gap-6">
-            <a href="#" className="text-sm text-gray-400 hover:text-white transition">Privacy Policy</a>
-            <a href="#" className="text-sm text-gray-400 hover:text-white transition">Terms of Service</a>
-            <a href="#" className="text-sm text-gray-400 hover:text-white transition">Support</a>
-          </div>
-        </div>
          {/* --- End Footer Bottom --- */}
       </div>
     </footer>
