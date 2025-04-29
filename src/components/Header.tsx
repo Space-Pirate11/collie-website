@@ -35,7 +35,7 @@ const Header = () => {
         </nav>
         
         <div className="hidden md:flex space-x-4">
-          <a href="#pricing" className="btn-outline">Pre-order</a>
+          <a href="#pricing" className="btn-outline">Pre-Order</a>
           <a href="#contact" className="btn-primary">Join Beta</a>
         </div>
         
