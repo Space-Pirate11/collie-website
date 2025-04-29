@@ -23,7 +23,7 @@ const Hero = () => {
             </p>
             <div className="flex flex-col sm:flex-row justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
               <a href="#pricing" className="btn-primary">
-                Pre-order Now
+                Pre-Orders Open Soon
               </a>
               <a href="#contact" className="btn-outline">
                 Join Beta Program
@@ -58,7 +58,7 @@ const Hero = () => {
                     <p className="text-gray-400">Smart Health Collar</p>
                   </div>
                   <span className="glass-card px-3 py-1 rounded-full text-sm font-medium bg-cyan-500/20 text-cyan-400">
-                    Pre-order
+                    Pre-Orders Open Soon
                   </span>
                 </div>
               </div>
