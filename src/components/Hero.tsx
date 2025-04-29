@@ -59,7 +59,7 @@ const Hero = () => {
               <div className="relative glass-card p-8 rounded-3xl max-w-sm mx-auto backdrop-blur-lg"> {/* Ensure glass-card styles are defined */}
                 {/* Dog Image */}
                 <img
-                  src="https://images.pexels.com/photos/3361739/pexels-photo-3361739.jpeg?auto=compress&cs=tinysrgb&h=650"
+                  src="/Desktop/sni.png"
                   alt="Collie Smart Collar on a dog"
                   className="rounded-xl shadow-lg w-full object-cover aspect-square"
                   // Add an onerror handler for fallback
