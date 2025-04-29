@@ -16,7 +16,7 @@ const Footer = () => {
 
   const handleSubscribeSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!googleAppsScriptUrl || googleAppsScriptUrl === 'https://script.google.com/macros/s/AKfycbx8avnNJds9aAt6nNk1U6rMkA2ZVO_2W7IZc2SN-7-TfyNcHYM7R0AolYOACShy4xnGNA/exec') {
+    if (!googleAppsScriptUrl) {
         setResponseMessage("Configuration error: Apps Script URL is not set.");
         setStatus("error");
         return;
