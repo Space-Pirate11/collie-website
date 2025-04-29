@@ -5,8 +5,10 @@ import { Mail, Linkedin, Send, CheckCircle, Loader2, User, MessageSquare } from 
 // Placeholder for teamMembers data if not available
 // import { teamMembers } from '../data/teamMembers'; // Adjust the path as necessary
 const teamMembers = [
-  { name: "Pranav Adya", title: "Co-Founder", linkedin: "https://www.linkedin.com/in/amol-tandon-a11971205" },
-  { name: "Amol Tandon", title: "Co-Founder", linkedin: "https://www.linkedin.com/in/pranav-adya-999a36272" },
+  // --- CORRECTED LINKEDIN URLs ---
+  { name: "Pranav Adya", title: "Co-Founder", linkedin: "https://www.linkedin.com/in/pranav-adya-999a36272" }, // Correct URL for Pranav
+  { name: "Amol Tandon", title: "Co-Founder", linkedin: "https://www.linkedin.com/in/amol-tandon-a11971205" }, // Correct URL for Amol
+  // --- END CORRECTION ---
   { name: "Rohit Seshadri", title: "Co-Founder", linkedin: "https://www.linkedin.com/in/rohit-seshadri" },
     // Add other members as needed, ensure structure matches usage
 ];
@@ -26,8 +28,8 @@ interface FormStatus {
 function Contact() {
   // Filter team members for LinkedIn links
   const linkedInProfiles = teamMembers
-    .filter(m => m.title !== 'Chief Morale Officer') // Example filter
-    .map(member => ({ name: member.name, url: member.linkedin || '#' }));
+    .filter(m => m.title !== 'Chief Morale Officer') // Example filter remains
+    .map(member => ({ name: member.name, url: member.linkedin || '#' })); // Ensure fallback if URL is missing
 
   const [formData, setFormData] = useState<FormData>({ name: '', email: '', message: '' });
   const [formStatus, setFormStatus] = useState<FormStatus>({ submitting: false, submitted: false, error: null });
@@ -97,7 +99,7 @@ function Contact() {
               {linkedInProfiles.map(profile => (
                 <a
                   key={profile.name}
-                  href={profile.url}
+                  href={profile.url} // This now uses the corrected URL
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-cyan-400 hover:text-white transition-colors duration-200" // Changed to flex, removed mr-4
