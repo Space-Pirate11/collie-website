@@ -5,8 +5,9 @@ import { Mail, Linkedin, Send, CheckCircle, Loader2, User, MessageSquare } from 
 // Placeholder for teamMembers data if not available
 // import { teamMembers } from '../data/teamMembers'; // Adjust the path as necessary
 const teamMembers = [
-    { name: "Alice", title: "Developer", linkedin: "#" },
-    { name: "Bob", title: "Designer", linkedin: "#" },
+  { name: "Pranav Adya", title: "Co-Founder", linkedin: "https://www.linkedin.com/in/amol-tandon-a11971205" },
+  { name: "Amol Tandon", title: "Co-Founder", linkedin: "https://www.linkedin.com/in/pranav-adya-999a36272" },
+  { name: "Rohit Seshadri", title: "Co-Founder", linkedin: "https://www.linkedin.com/in/rohit-seshadri" },
     // Add other members as needed, ensure structure matches usage
 ];
 
