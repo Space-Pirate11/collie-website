@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// No need to import Activity unless used elsewhere
-// No need to import the logo image file
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -21,36 +19,41 @@ const Header = () => {
         isScrolled ? 'bg-charcoal/80 backdrop-blur-md py-3 shadow-lg' : 'bg-transparent py-6'
       }`}
     >
-      <div className="container-custom flex justify-between items-center">
-        {/* --- Logo Section Changed --- */}
-        {/* Added span for text next to image */}
-        <a href="#" className="flex items-center"> {/* Ensure flex and items-center are present */}
+      {/* Added 'relative' positioning context */}
+      <div className="container-custom relative flex justify-between items-center"> 
+        {/* --- Logo Section --- */}
+        <a href="#" className="flex items-center"> 
           <img 
             src="/final.png" 
             alt="Collie Logo" 
-            className="h-8 w-auto" // Adjust height/width as needed
+            className="h-8 w-auto" 
           />
-          {/* Added text span */}
-          <span className="ml-2 text-xl font-bold text-cyan-400"> {/* Added ml-2 for spacing, adjust classes as needed */}
+          <span className="ml-2 text-xl font-bold text-white-400"> 
             Collie 
           </span>
         </a>
-        {/* --- End Logo Section Change --- */}
+        {/* --- End Logo Section --- */}
         
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-8">
+        {/* --- Desktop Navigation Centered --- */}
+        {/* Added absolute positioning for centering */}
+        <nav className="hidden md:flex space-x-8 absolute left-1/2 transform -translate-x-1/2"> 
           <a href="#how-it-works" className="text-gray-300 hover:text-white transition">How It Works</a>
           <a href="#benefits" className="text-gray-300 hover:text-white transition">Benefits</a>
           <a href="#pricing" className="text-gray-300 hover:text-white transition">Pricing</a>
           <a href="#faq" className="text-gray-300 hover:text-white transition">FAQ</a>
         </nav>
+        {/* --- End Desktop Navigation --- */}
         
+        {/* --- Action Buttons --- */}
+        {/* This div remains positioned by the parent's justify-between */}
         <div className="hidden md:flex space-x-4">
           <a href="#pricing" className="btn-outline">Pre-Order</a>
           <a href="#contact" className="btn-primary">Join Beta</a>
         </div>
+        {/* --- End Action Buttons --- */}
         
         {/* Mobile Menu Button */}
+        {/* This remains on the right because the parent uses justify-between */}
         <button 
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           className="md:hidden text-white focus:outline-none"
