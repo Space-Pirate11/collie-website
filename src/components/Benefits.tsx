@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { 
+import {
   Stethoscope,
   FileText,
   ActivitySquare,
@@ -13,25 +13,25 @@ const Benefits = () => {
     triggerOnce: true,
     threshold: 0.1,
   });
-  
+
   const benefits = [
     {
-      icon: <Stethoscope strokeWidth={1.5} size={32} />,
+      icon: <Stethoscope strokeWidth={1.5} size={32} />, // Icon component instance
       title: 'Early Illness Detection',
       description: 'Identify potential health issues before they become serious problems with AI-powered anomaly detection.'
     },
     {
-      icon: <FileText strokeWidth={1.5} size={32} />,
+      icon: <FileText strokeWidth={1.5} size={32} />, // Icon component instance
       title: 'Vet-Ready Reports',
       description: 'Share comprehensive health data with your veterinarian for more informed diagnosis and treatment.'
     },
     {
-      icon: <ActivitySquare strokeWidth={1.5} size={32} />,
+      icon: <ActivitySquare strokeWidth={1.5} size={32} />, // Icon component instance
       title: 'Activity Optimization',
       description: 'Ensure your dog gets the right amount of exercise based on breed, age, and health condition.'
     },
     {
-      icon: <HeartPulse strokeWidth={1.5} size={32} />,
+      icon: <HeartPulse strokeWidth={1.5} size={32} />, // Icon component instance
       title: 'Peace of Mind',
       description: 'Rest easy knowing you\'ll be alerted to changes in your dog\'s health status 24/7.'
     }
@@ -74,7 +74,7 @@ const Benefits = () => {
           </motion.p>
         </div>
 
-        <motion.div 
+        <motion.div
           ref={ref}
           variants={containerVariants}
           initial="hidden"
@@ -87,9 +87,13 @@ const Benefits = () => {
               variants={itemVariants}
               className="glass-card p-8 rounded-xl group hover:bg-gradient-to-br hover:from-cyan-500/10 hover:to-purple-500/10 transition-all duration-300"
             >
+              {/* Gradient Border Circle */}
               <div className="w-16 h-16 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 p-px mb-6">
+                 {/* Inner Background Circle */}
                 <div className="w-full h-full rounded-full bg-charcoal flex items-center justify-center">
+                  {/* Icon container with gradient text effect */}
                   <div className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
+                    {/* Render the icon component stored in benefit.icon */}
                     {benefit.icon}
                   </div>
                 </div>
