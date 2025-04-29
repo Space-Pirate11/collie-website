@@ -66,7 +66,7 @@ const Hero = () => {
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.onerror = null; // Prevent infinite loop
-                    target.src='https://placehold.co/600x600/334155/94a3b8?text=Collie+Collar'; // Placeholder image
+                    target.src='/Desktop/sni.png'; // Placeholder image
                    }}
                 />
                 {/* Card Footer */}
