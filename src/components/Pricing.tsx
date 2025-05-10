@@ -4,7 +4,6 @@ import { useInView } from 'react-intersection-observer';
 import { Check, Loader2 } from 'lucide-react';
 import { products } from '../stripe-config';
 import { createCheckoutSession } from '../lib/stripe';
-import { useSupabaseClient, useSession } from '@supabase/auth-helpers-react';
 
 const Pricing = () => {
   const [ref, inView] = useInView({
@@ -13,31 +12,10 @@ const Pricing = () => {
   });
 
   const [isLoading, setIsLoading] = useState(false);
-  const supabase = useSupabaseClient();
-  const session = useSession();
 
   const handlePreOrder = async () => {
     try {
       setIsLoading(true);
-
-      if (!session?.access_token) {
-        // Create a signup form or redirect to auth page
-        const { data, error } = await supabase.auth.signUp({
-          email: prompt('Please enter your email to continue:') || '',
-          password: 'temporary-password-' + Math.random().toString(36).slice(2),
-        });
-
-        if (error) {
-          console.error('Signup error:', error);
-          alert('Failed to create account. Please try again.');
-          return;
-        }
-
-        if (!data.session?.access_token) {
-          alert('Please check your email to verify your account.');
-          return;
-        }
-      }
 
       const successUrl = `${window.location.origin}/success?session_id={CHECKOUT_SESSION_ID}`;
       const cancelUrl = `${window.location.origin}/pricing`;
@@ -45,7 +23,7 @@ const Pricing = () => {
       const checkoutUrl = await createCheckoutSession(
         products.collie.priceId,
         products.collie.mode,
-        session?.access_token || data.session.access_token,
+        'anonymous', // Pass anonymous token since we don't need auth
         successUrl,
         cancelUrl
       );
