@@ -165,7 +165,7 @@ const Hero = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="space-y-6"
+            className="flex flex-col h-full"
           >
             <img
               src="/sni.png"
@@ -174,7 +174,7 @@ const Hero = () => {
             />
 
             {/* Product Selection */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4 flex-grow">
               <ProductCard
                 title="Lite"
                 price="$59"
@@ -206,7 +206,7 @@ const Hero = () => {
             </div>
 
             {/* Pre-order Button */}
-            <div className="glass-card p-6 rounded-xl text-center">
+            <div className="glass-card p-6 rounded-xl text-center mt-6">
               <button
                 onClick={handlePreOrder}
                 disabled={isLoading}
@@ -277,7 +277,7 @@ const ProductCard = ({ title, price, subscription, isSelected, onClick, features
       <div className="text-2xl font-bold text-cyan-400">{price}</div>
     </div>
     <p className="text-sm text-gray-400 mb-4">{subscription} for data & vet connection</p>
-    <ul className="space-y-3">
+    <ul className="space-y-3 flex-grow">
       {features.map((feature, index) => (
         <li key={index} className="flex items-center gap-2 text-sm">
           <span className="text-cyan-400">{feature.icon}</span>
