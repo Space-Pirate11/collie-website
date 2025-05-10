@@ -2,16 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { CheckCircle, ArrowLeft } from 'lucide-react';
-import { createBrowserClient } from '@supabase/ssr';
+import { supabase } from '../lib/supabase';
 
 const Success = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const [orderDetails, setOrderDetails] = useState<any>(null);
-  const supabase = createBrowserClient(
-    import.meta.env.VITE_SUPABASE_URL,
-    import.meta.env.VITE_SUPABASE_ANON_KEY
-  );
 
   useEffect(() => {
     const fetchOrderDetails = async () => {

@@ -40,5 +40,10 @@ export default defineConfig(({ mode }) => {
     optimizeDeps: {
       exclude: ['lucide-react'],
     },
+    define: {
+      // Prevent environment variables from being bundled
+      'import.meta.env.VITE_SUPABASE_URL': 'undefined',
+      'import.meta.env.VITE_SUPABASE_ANON_KEY': 'undefined',
+    },
   };
 });
