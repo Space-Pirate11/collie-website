@@ -7,8 +7,8 @@ import DashboardPreview from './components/DashboardPreview';
 import AnalyticsDashboard from './components/AnalyticsDashboard';
 import Benefits from './components/Benefits';
 import FAQ from './components/FAQ';
-import Footer from './components/Footer';
 import Contact from './components/Contact';
+import Footer from './components/Footer';
 import Success from './components/Success';
 
 function App() {
@@ -28,9 +28,9 @@ function App() {
                 <AnalyticsDashboard />
                 <Benefits />
                 <FAQ />
+                <Contact />
               </main>
               <Footer />
-              <Contact />
             </div>
           }
         />
