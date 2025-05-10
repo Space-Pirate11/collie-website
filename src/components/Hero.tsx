@@ -103,7 +103,7 @@ const Hero = () => {
             </h1>
             
             <div className="glass-card inline-block p-4 rounded-xl mb-8 bg-white/5">
-              <p className="text-white text-xl">Going to the vet sucks. Collie changes that.</p>
+              <p className="text-white font-extrabold text-xl">Going to the vet sucks. Collie changes that.</p>
             </div>
 
             {/* Vital Stats Grid */}
