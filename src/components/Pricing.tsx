@@ -88,13 +88,13 @@ const Pricing = () => {
                   Applied to final purchase price
                 </p>
               </div>
-              
+
               {error && (
                 <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400">
                   {error}
                 </div>
               )}
-
+              
               <button 
                 onClick={handlePreOrder}
                 disabled={isLoading}
