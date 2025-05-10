@@ -115,7 +115,7 @@ const Hero = () => {
             </div>
 
             {/* Email Signup Form */}
-            <form onSubmit={handleSubscribeSubmit} className="flex flex-col sm:flex-row gap-3 mb-8">
+            <form onSubmit={handleSubscribeSubmit} className="flex flex-col sm:flex-row gap-3">
               <div className="relative flex-grow">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Mail size={18} className="text-gray-400" />
@@ -146,7 +146,7 @@ const Hero = () => {
             </form>
 
             {/* Response Message */}
-            <div className="mb-8 min-h-[1.5rem]">
+            <div className="min-h-[1.5rem]">
               {responseMessage && (
                 <p className={`text-sm ${status === 'success' ? 'text-green-400' : 'text-red-400'}`}>
                   {responseMessage}
