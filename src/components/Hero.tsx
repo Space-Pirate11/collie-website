@@ -101,9 +101,13 @@ const Hero = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
               Collie: The AI Smart Collar for Canine Health
             </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-8">
-              Continuously monitor your dog's health vitals and receive early warning insights, powered by advanced AI.
-            </p>
+            
+            <div className="glass-card p-6 rounded-xl mb-8 bg-gradient-to-br from-white/5 to-white/10 border border-white/10">
+              <h2 className="text-xl font-bold mb-3 text-cyan-400">The Vision</h2>
+              <p className="text-gray-300">
+                Going to the vet sucks. Collie continuously monitors your dog's health vitals and activity. Powered by advanced AI trained specifically on your dog, Collie will be able to give early warning insights, recommend diet and activity changes, refill prescriptions, and seamlessly connect with your vet for serious issues.
+              </p>
+            </div>
 
             {/* Vital Stats Grid */}
             <div className="grid grid-cols-2 gap-4 mb-8">
