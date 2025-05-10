@@ -192,8 +192,8 @@ const Hero = () => {
                   { icon: <Activity size={18} />, text: "3-axis IMU activity tracking" },
                   { icon: <PawPrint size={18} />, text: "Scratch & lick detection" },
                   { icon: <BatteryMedium size={18} />, text: "2-month battery life" },
-                  { icon: <BrainCircuit size={18} />, text: "AI-powered insights" },
-                  { icon: <Stethoscope size={18} />, text: "Optional vet connection" },
+                  { icon: <Stethoscope size={18} />, text: "AI-powered insights" },
+                  { icon: <BrainCircuit size={18} />, text: "Find My Network compatible" },
                 ]}
               />
               <ProductCard
