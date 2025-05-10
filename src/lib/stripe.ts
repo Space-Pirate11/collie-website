@@ -1,4 +1,8 @@
+import { loadStripe } from '@stripe/stripe-js';
 import { products } from '../stripe-config';
+
+// Initialize Stripe with the publishable key
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 export async function createCheckoutSession(
   priceId: string,
@@ -8,32 +12,24 @@ export async function createCheckoutSession(
   cancelUrl: string,
 ) {
   try {
-    const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/stripe-checkout`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        ...(token && { Authorization: `Bearer ${token}` }),
-      },
-      body: JSON.stringify({
-        price_id: priceId,
-        mode,
-        success_url: successUrl,
-        cancel_url: cancelUrl,
-      }),
+    const stripe = await stripePromise;
+    if (!stripe) {
+      throw new Error('Stripe failed to initialize');
+    }
+
+    const { error } = await stripe.redirectToCheckout({
+      mode,
+      lineItems: [{ price: priceId, quantity: 1 }],
+      successUrl,
+      cancelUrl,
     });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error('Checkout error response:', errorData);
-      throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+    if (error) {
+      throw error;
     }
 
-    const { url } = await response.json();
-    if (!url) {
-      throw new Error('No checkout URL returned from server');
-    }
-
-    return url;
+    // The redirect will happen automatically, but we return null to satisfy TypeScript
+    return null;
   } catch (error) {
     console.error('Detailed checkout error:', error);
     throw error;

@@ -22,7 +22,7 @@ const Pricing = () => {
       const successUrl = `${window.location.origin}/success?session_id={CHECKOUT_SESSION_ID}`;
       const cancelUrl = `${window.location.origin}/pricing`;
 
-      const checkoutUrl = await createCheckoutSession(
+      await createCheckoutSession(
         products.collie.priceId,
         products.collie.mode,
         null,
@@ -30,11 +30,7 @@ const Pricing = () => {
         cancelUrl
       );
 
-      if (!checkoutUrl) {
-        throw new Error('Failed to create checkout session');
-      }
-
-      window.location.href = checkoutUrl;
+      // No need to handle the URL redirect as Stripe.js handles it automatically
     } catch (err) {
       console.error('Error creating checkout session:', err);
       setError('Failed to start checkout process. Please try again.');
