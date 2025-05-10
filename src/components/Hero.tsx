@@ -96,58 +96,24 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center md:text-left"
           >
-            <h1 className="mb-6 font-extrabold leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
               Collie: The AI Smart Collar for Canine Health
             </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-8 md:pr-12">
+            <p className="text-xl md:text-2xl text-gray-300 mb-8">
               Continuously monitor your dog's health vitals and receive early warning insights, powered by advanced AI.
             </p>
 
-            {/* Pre-order Button */}
-            <div className="mb-8">
-              <div className="glass-card p-8 rounded-xl">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-6">
-                  <div>
-                    <h3 className="text-2xl font-bold mb-2">Pre-Order Now</h3>
-                    <p className="text-gray-300">Secure your Collie with a $20 deposit</p>
-                  </div>
-                  <button
-                    onClick={handlePreOrder}
-                    disabled={isLoading}
-                    className="btn-primary whitespace-nowrap min-w-[200px]"
-                  >
-                    {isLoading ? (
-                      <>
-                        <Loader2 className="animate-spin mr-2" size={20} />
-                        Processing...
-                      </>
-                    ) : (
-                      'Pre-Order ($20)'
-                    )}
-                  </button>
-                </div>
-                
-                <div className="grid grid-cols-2 gap-4">
-                  <Feature text="Smart collar device" />
-                  <Feature text="Mobile app access" />
-                  <Feature text="Health monitoring" />
-                  <Feature text="Activity tracking" />
-                  <Feature text="1-year warranty" />
-                  <Feature text="Priority shipping" />
-                </div>
-
-                {error && (
-                  <div className="mt-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400">
-                    {error}
-                  </div>
-                )}
-              </div>
+            {/* Vital Stats Grid */}
+            <div className="grid grid-cols-2 gap-4 mb-8">
+              <VitalStat icon={<Heart size={24} className="text-cyan-400" />} label="Heart Rate" value="75 bpm" change="+2%" />
+              <VitalStat icon={<Activity size={24} className="text-purple-400" />} label="Activity" value="Active" change="20 min" />
+              <VitalStat icon={<PawPrint size={24} className="text-cyan-400" />} label="Steps" value="2,457" change="+15%" />
+              <VitalStat icon={<BatteryMedium size={24} className="text-purple-400" />} label="Battery" value="85%" change="3.2 days" />
             </div>
 
             {/* Email Signup Form */}
-            <form onSubmit={handleSubscribeSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto md:mx-0">
+            <form onSubmit={handleSubscribeSubmit} className="flex flex-col sm:flex-row gap-3">
               <div className="relative flex-grow">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Mail size={18} className="text-gray-400" />
@@ -177,53 +143,65 @@ const Hero = () => {
               </button>
             </form>
             {/* Response Message */}
-            <div className="mt-3 min-h-[1.5rem] text-left">
+            <div className="mt-3 min-h-[1.5rem]">
               {responseMessage && (
                 <p className={`text-sm ${status === 'success' ? 'text-green-400' : 'text-red-400'}`}>
                   {responseMessage}
                 </p>
               )}
             </div>
-
-            {/* Vital Stats Grid */}
-            <div className="mt-12 grid grid-cols-2 gap-6 max-w-md mx-auto md:mx-0">
-              <VitalStat icon={<Heart size={24} className="text-cyan-400" />} label="Heart Rate" value="75 bpm" change="+2%" />
-              <VitalStat icon={<Activity size={24} className="text-purple-400" />} label="Activity" value="Active" change="20 min" />
-              <VitalStat icon={<PawPrint size={24} className="text-cyan-400" />} label="Steps" value="2,457" change="+15%" />
-              <VitalStat icon={<BatteryMedium size={24} className="text-purple-400" />} label="Battery" value="85%" change="3.2 days" />
-            </div>
           </motion.div>
 
-          {/* Right Column: Image Card */}
+          {/* Right Column: Pre-order Card */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex justify-center"
           >
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-radial from-cyan-500/20 to-transparent rounded-full blur-2xl"></div>
-              <div className="relative glass-card p-8 rounded-3xl max-w-sm mx-auto backdrop-blur-lg">
-                <img
-                  src="/sni.png"
-                  alt="Collie Smart Collar on a dog"
-                  className="rounded-xl shadow-lg w-full object-cover aspect-square"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.onerror = null;
-                    target.src='/sni.png';
-                   }}
-                />
-                <div className="mt-6 flex items-center justify-between">
-                  <div>
-                    <h3 className="text-2xl font-bold">Collie</h3>
-                    <p className="text-gray-400">Smart Health Collar</p>
-                  </div>
-                  <span className="glass-card px-3 py-1 rounded-full text-sm font-medium bg-cyan-500/20 text-cyan-400 whitespace-nowrap flex-shrink-0">
-                    Pre-Orders Open
-                  </span>
+            <div className="glass-card p-8 rounded-3xl">
+              <img
+                src="/sni.png"
+                alt="Collie Smart Collar on a dog"
+                className="w-full aspect-square object-cover rounded-2xl mb-8"
+              />
+
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h3 className="text-2xl font-bold">Collie</h3>
+                  <p className="text-gray-400">Smart Health Collar</p>
                 </div>
+                <button
+                  onClick={handlePreOrder}
+                  disabled={isLoading}
+                  className="btn-primary whitespace-nowrap"
+                >
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="animate-spin mr-2" size={20} />
+                      Processing...
+                    </>
+                  ) : (
+                    'Pre-Order ($20)'
+                  )}
+                </button>
               </div>
+
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                <Feature text="Smart collar device" />
+                <Feature text="Mobile app access" />
+                <Feature text="Continuous monitoring" />
+                <Feature text="Activity tracking" />
+                <Feature text="Sleep analysis" />
+                <Feature text="Early warning system" />
+                <Feature text="1-year warranty" />
+                <Feature text="Priority shipping" />
+              </div>
+
+              {error && (
+                <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400">
+                  {error}
+                </div>
+              )}
             </div>
           </motion.div>
         </div>
@@ -232,7 +210,6 @@ const Hero = () => {
   );
 };
 
-// Reusable VitalStat component
 const VitalStat = ({ icon, label, value, change }: { icon: React.ReactNode, label: string, value: string, change: string }) => {
   return (
     <div className="glass-card p-4 rounded-xl">
