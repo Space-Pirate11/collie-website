@@ -91,7 +91,7 @@ const Hero = () => {
     <section className="relative pt-24 pb-20 md:pt-32 md:pb-32 overflow-hidden">
       <div className="waveform-bg"></div>
 
-      <div className="container-custom relative z-5">
+      <div className="container-custom relative z-10">
         <div className="grid md:grid-cols-2 gap-12 items-start">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
