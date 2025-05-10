@@ -1,7 +1,6 @@
 import { loadStripe } from '@stripe/stripe-js';
 import { products } from '../stripe-config';
 
-// Initialize Stripe with the publishable key
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 export async function createCheckoutSession(
@@ -28,7 +27,7 @@ export async function createCheckoutSession(
       throw error;
     }
 
-    // The redirect will happen automatically, but we return null to satisfy TypeScript
+    // The redirect will happen automatically
     return null;
   } catch (error) {
     console.error('Detailed checkout error:', error);
