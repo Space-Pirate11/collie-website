@@ -1,38 +1,129 @@
-import React from 'react';
+import React, { useState, FormEvent, ChangeEvent } from 'react';
 import { motion } from 'framer-motion';
-import { Activity, Heart, PawPrint, BatteryMedium } from 'lucide-react';
+import { Activity, Heart, PawPrint, BatteryMedium, Mail, ArrowRight } from 'lucide-react';
 
 const Hero = () => {
+  const [email, setEmail] = useState<string>("");
+  const [responseMessage, setResponseMessage] = useState<string>("");
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>("idle");
+
+  const handleSubscribeSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycbx8avnNJds9aAt6nNk1U6rMkA2ZVO_2W7IZc2SN-7-TfyNcHYM7R0AolYOACShy4xnGNA/exec';
+    
+    if (!googleAppsScriptUrl) {
+      setResponseMessage("Configuration error: Apps Script URL is not set.");
+      setStatus("error");
+      return;
+    }
+    
+    setResponseMessage("");
+    setStatus("submitting");
+
+    try {
+      const formData = new FormData();
+      formData.append("email", email);
+
+      const res = await fetch(googleAppsScriptUrl, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (res.ok) {
+        try {
+          const data = await res.json();
+          if (data && data.status === "success") {
+            setResponseMessage("Thanks for subscribing! We'll keep you updated.");
+            setStatus("success");
+            setEmail("");
+          } else {
+            setResponseMessage(data.message || "Subscription processed, but status unclear.");
+            setStatus("success");
+            setEmail("");
+          }
+        } catch (jsonError) {
+          console.log("Response OK but not JSON, assuming success.", jsonError);
+          setResponseMessage("Thanks for subscribing! We'll keep you updated.");
+          setStatus("success");
+          setEmail("");
+        }
+      } else {
+        console.error("Subscription failed response:", res.status, res.statusText);
+        setResponseMessage(`Subscription failed (${res.status}). Please try again later.`);
+        setStatus("error");
+      }
+    } catch (error) {
+      console.error("Subscription submission error:", error);
+      const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred.';
+      setResponseMessage(`An error occurred: ${errorMessage}. Please try again.`);
+      setStatus("error");
+    }
+  };
+
   return (
     <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden">
-      {/* Background element - Ensure 'waveform-bg' class is defined in your CSS */}
       <div className="waveform-bg"></div>
 
-      {/* Main content container - Ensure 'container-custom' provides necessary padding/max-width */}
       <div className="container-custom relative z-10">
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Left Column: Text Content & Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="text-center md:text-left"
           >
-            {/* Main Heading */}
-            <h1 className="mb-6 font-extrabold leading-tight"> {/* Ensure heading styles are defined */}
+            <h1 className="mb-6 font-extrabold leading-tight">
               Collie: The AI Smart Collar for Canine Health
             </h1>
-            {/* Subtitle */}
             <p className="text-xl md:text-2xl text-gray-300 mb-8 md:pr-12">
               Continuously monitor your dog's health vitals and receive early warning insights, powered by advanced AI.
             </p>
-            {/* Action Buttons */}
+
+            {/* Email Signup Form */}
+            <div className="mb-8">
+              <form onSubmit={handleSubscribeSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto md:mx-0">
+                <div className="relative flex-grow">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <Mail size={18} className="text-gray-400" />
+                  </div>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+                    placeholder="Enter your email"
+                    required
+                    disabled={status === 'submitting'}
+                    className="w-full bg-white/5 border border-white/10 rounded-lg pl-10 pr-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-white placeholder-gray-400 disabled:opacity-50"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  disabled={status === 'submitting' || status === 'success'}
+                  className="btn-primary whitespace-nowrap"
+                >
+                  {status === 'submitting' ? (
+                    'Subscribing...'
+                  ) : status === 'success' ? (
+                    'Subscribed!'
+                  ) : (
+                    <>Get Notified <ArrowRight size={16} className="ml-2" /></>
+                  )}
+                </button>
+              </form>
+              {/* Response Message */}
+              <div className="mt-3 min-h-[1.5rem] text-left">
+                {responseMessage && (
+                  <p className={`text-sm ${status === 'success' ? 'text-green-400' : 'text-red-400'}`}>
+                    {responseMessage}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {/* Action Button */}
             <div className="flex flex-col sm:flex-row justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
-              <a href="#pricing" className="btn-primary"> {/* Ensure btn-primary styles are defined */}
-                Pre-Orders Open Soon
-              </a>
-              <a href="#contact" className="btn-outline"> {/* Ensure btn-outline styles are defined */}
-                Join Beta Program
+              <a href="#pricing" className="btn-primary">
+                Pre-Order ($20 Deposit)
               </a>
             </div>
 
@@ -53,31 +144,25 @@ const Hero = () => {
             className="flex justify-center"
           >
             <div className="relative">
-              {/* Background Glow Effect */}
               <div className="absolute inset-0 bg-gradient-radial from-cyan-500/20 to-transparent rounded-full blur-2xl"></div>
-              {/* Image Card Container */}
-              <div className="relative glass-card p-8 rounded-3xl max-w-sm mx-auto backdrop-blur-lg"> {/* Ensure glass-card styles are defined */}
-                {/* Dog Image */}
+              <div className="relative glass-card p-8 rounded-3xl max-w-sm mx-auto backdrop-blur-lg">
                 <img
                   src="/sni.png"
                   alt="Collie Smart Collar on a dog"
                   className="rounded-xl shadow-lg w-full object-cover aspect-square"
-                  // Add an onerror handler for fallback
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    target.onerror = null; // Prevent infinite loop
-                    target.src='/sni.png'; // Placeholder image
+                    target.onerror = null;
+                    target.src='/sni.png';
                    }}
                 />
-                {/* Card Footer */}
                 <div className="mt-6 flex items-center justify-between">
                   <div>
                     <h3 className="text-2xl font-bold">Collie</h3>
                     <p className="text-gray-400">Smart Health Collar</p>
                   </div>
-                  {/* Pre-Order Tag - Added whitespace-nowrap and flex-shrink-0 */}
-                  <span className="glass-card px-3 py-1 rounded-full text-sm font-medium bg-cyan-500/20 text-cyan-400 whitespace-nowrap flex-shrink-0"> {/* Added flex-shrink-0 */}
-                    Pre-Orders Open Soon
+                  <span className="glass-card px-3 py-1 rounded-full text-sm font-medium bg-cyan-500/20 text-cyan-400 whitespace-nowrap flex-shrink-0">
+                    Pre-Orders Open
                   </span>
                 </div>
               </div>
@@ -92,13 +177,11 @@ const Hero = () => {
 // Reusable VitalStat component
 const VitalStat = ({ icon, label, value, change }: { icon: React.ReactNode, label: string, value: string, change: string }) => {
   return (
-    <div className="glass-card p-4 rounded-xl"> {/* Ensure glass-card styles are defined */}
-      {/* Icon and Label */}
+    <div className="glass-card p-4 rounded-xl">
       <div className="flex items-center space-x-3 mb-2">
         {icon}
         <span className="text-sm font-medium text-gray-300">{label}</span>
       </div>
-      {/* Value and Change */}
       <div className="flex justify-between items-end">
         <span className="text-xl font-bold">{value}</span>
         <span className="text-xs text-gray-400">{change}</span>
