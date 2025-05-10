@@ -39,7 +39,7 @@ const Header = () => {
         </nav>
         
         <div className="hidden md:flex space-x-4">
-          <a href="#contact" className="btn-outline">Get Updates</a>
+          <button onClick={() => window.scrollTo(0, 0)} className="btn-primary">Pre-Order Now</button>
         </div>
         
         <button 
@@ -65,7 +65,7 @@ const Header = () => {
             <a href="#faq" className="text-gray-300 hover:text-white transition py-2 px-4 rounded hover:bg-white/5" onClick={() => setIsMobileMenuOpen(false)}>FAQ</a>
             <a href="#contact" className="text-gray-300 hover:text-white transition py-2 px-4 rounded hover:bg-white/5" onClick={() => setIsMobileMenuOpen(false)}>Contact</a>
             <div className="flex flex-col space-y-2 pt-2">
-              <a href="#contact" className="btn-outline w-full text-center" onClick={() => setIsMobileMenuOpen(false)}>Get Updates</a>
+              <button onClick={() => window.scrollTo(0, 0)} className="btn-primary w-full">Pre-Order Now</button>
             </div>
           </div>
         </div>
