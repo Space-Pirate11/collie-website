@@ -2,7 +2,7 @@ import React, { useState, FormEvent, ChangeEvent, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Activity, Heart, PawPrint, BatteryMedium, Mail, ArrowRight, Check, Loader2, Zap, MapPin, BrainCircuit, Bell, Stethoscope, Phone, Moon, History } from 'lucide-react';
 import { createCheckoutSession } from '../lib/stripe';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Hero = () => {
   const [email, setEmail] = useState<string>("");
@@ -12,11 +12,14 @@ const Hero = () => {
   const [error, setError] = useState<string | null>(null);
   const [selectedProduct, setSelectedProduct] = useState<'lite' | 'pro'>('pro');
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Reset loading state when navigating back
   useEffect(() => {
-    setIsLoading(false);
-    setError(null);
+    if (location.key) {
+      setIsLoading(false);
+      setError(null);
+    }
   }, [location]);
 
   const handleSubscribeSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -90,7 +93,6 @@ const Hero = () => {
     } catch (err) {
       console.error('Error creating checkout session:', err);
       setError('Failed to start checkout process. Please try again.');
-    } finally {
       setIsLoading(false);
     }
   };
