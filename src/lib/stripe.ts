@@ -3,7 +3,7 @@ import { products } from '../stripe-config';
 export async function createCheckoutSession(
   priceId: string,
   mode: 'payment' | 'subscription',
-  token: string,
+  token: string | null,
   successUrl: string,
   cancelUrl: string,
 ) {
@@ -11,7 +11,7 @@ export async function createCheckoutSession(
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
+      ...(token && { Authorization: `Bearer ${token}` }),
     },
     body: JSON.stringify({
       price_id: priceId,

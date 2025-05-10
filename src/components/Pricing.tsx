@@ -12,10 +12,12 @@ const Pricing = () => {
   });
 
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handlePreOrder = async () => {
     try {
       setIsLoading(true);
+      setError(null);
 
       const successUrl = `${window.location.origin}/success?session_id={CHECKOUT_SESSION_ID}`;
       const cancelUrl = `${window.location.origin}/pricing`;
@@ -23,15 +25,19 @@ const Pricing = () => {
       const checkoutUrl = await createCheckoutSession(
         products.collie.priceId,
         products.collie.mode,
-        null, // Remove token requirement since we're handling auth in the edge function
+        null,
         successUrl,
         cancelUrl
       );
 
+      if (!checkoutUrl) {
+        throw new Error('Failed to create checkout session');
+      }
+
       window.location.href = checkoutUrl;
-    } catch (error) {
-      console.error('Error creating checkout session:', error);
-      alert('Failed to start checkout process. Please try again.');
+    } catch (err) {
+      console.error('Error creating checkout session:', err);
+      setError('Failed to start checkout process. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -83,6 +89,12 @@ const Pricing = () => {
                 </p>
               </div>
               
+              {error && (
+                <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400">
+                  {error}
+                </div>
+              )}
+
               <button 
                 onClick={handlePreOrder}
                 disabled={isLoading}
