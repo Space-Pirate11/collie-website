@@ -104,7 +104,6 @@ const Hero = () => {
             
             <div className="glass-card p-6 rounded-xl mb-8 bg-gradient-to-br from-white/5 to-white/10 border border-white/10">
               <h2 className="text-xl font-bold mb-3 text-cyan-400">Going to the vet sucks. Collie changes that.</h2>
-              </p>
             </div>
 
             {/* Vital Stats Grid */}
