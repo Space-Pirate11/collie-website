@@ -1,6 +1,6 @@
 import React, { useState, FormEvent, ChangeEvent } from 'react';
 import { motion } from 'framer-motion';
-import { Activity, Heart, PawPrint, Moon, Mail, ArrowRight, Check, Loader2, Zap, MapPin, BrainCircuit, Bell, Stethoscope, Phone } from 'lucide-react';
+import { Activity, Heart, PawPrint, Moon, Mail, ArrowRight, Check, Loader2, Zap, MapPin, BrainCircuit, Bell, Stethoscope, Phone, BatteryMedium } from 'lucide-react';
 import { createCheckoutSession } from '../lib/stripe';
 
 const Hero = () => {
