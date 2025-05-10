@@ -1,7 +1,8 @@
-import React, { useState, FormEvent, ChangeEvent } from 'react';
+import React, { useState, FormEvent, ChangeEvent, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Activity, Heart, PawPrint, BatteryMedium, Mail, ArrowRight, Check, Loader2, Zap, MapPin, BrainCircuit, Bell, Stethoscope, Phone, Moon, History } from 'lucide-react';
 import { createCheckoutSession } from '../lib/stripe';
+import { useLocation } from 'react-router-dom';
 
 const Hero = () => {
   const [email, setEmail] = useState<string>("");
@@ -10,6 +11,13 @@ const Hero = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [selectedProduct, setSelectedProduct] = useState<'lite' | 'pro'>('pro');
+  const location = useLocation();
+
+  // Reset loading state when navigating back
+  useEffect(() => {
+    setIsLoading(false);
+    setError(null);
+  }, [location]);
 
   const handleSubscribeSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -106,18 +114,8 @@ const Hero = () => {
               <p className="text-white font-extrabold text-xl">Going to the vet sucks. Collie changes that.</p>
             </div>
 
-            {/* Vital Stats Grid */}
-            <div className="grid grid-cols-2 gap-4 mb-8">
-              <VitalStat icon={<Heart size={24} className="text-cyan-400" />} label="Heart Rate" value="75 bpm" change="+2%" />
-              <VitalStat icon={<Activity size={24} className="text-purple-400" />} label="Activity" value="Active" change="20 min" />
-              <VitalStat icon={<PawPrint size={24} className="text-cyan-400" />} label="Steps" value="2,457" change="+15%" />
-              <VitalStat icon={<BatteryMedium size={24} className="text-purple-400" />} label="Battery" value="85%" change="3.2 days" />
-              <VitalStat icon={<Moon size={24} className="text-cyan-400" />} label="Sleep" value="8h 32m" change="Deep" />
-              <VitalStat icon={<History size={24} className="text-purple-400" />} label="History" value="30 days" change="View" />
-            </div>
-
             {/* Email Signup Form */}
-            <form onSubmit={handleSubscribeSubmit} className="flex flex-col sm:flex-row gap-3">
+            <form onSubmit={handleSubscribeSubmit} className="flex flex-col sm:flex-row gap-3 mb-8">
               <div className="relative flex-grow">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Mail size={18} className="text-gray-400" />
@@ -148,12 +146,22 @@ const Hero = () => {
             </form>
 
             {/* Response Message */}
-            <div className="mt-3 min-h-[1.5rem]">
+            <div className="mb-8 min-h-[1.5rem]">
               {responseMessage && (
                 <p className={`text-sm ${status === 'success' ? 'text-green-400' : 'text-red-400'}`}>
                   {responseMessage}
                 </p>
               )}
+            </div>
+
+            {/* Vital Stats Grid */}
+            <div className="grid grid-cols-2 gap-4 mb-8">
+              <VitalStat icon={<Heart size={24} className="text-cyan-400" />} label="Heart Rate" value="75 bpm" change="+2%" />
+              <VitalStat icon={<Activity size={24} className="text-purple-400" />} label="Activity" value="Active" change="20 min" />
+              <VitalStat icon={<PawPrint size={24} className="text-cyan-400" />} label="Steps" value="2,457" change="+15%" />
+              <VitalStat icon={<BatteryMedium size={24} className="text-purple-400" />} label="Battery" value="85%" change="3.2 days" />
+              <VitalStat icon={<Moon size={24} className="text-cyan-400" />} label="Sleep" value="8h 32m" change="Deep" />
+              <VitalStat icon={<History size={24} className="text-purple-400" />} label="History" value="30 days" change="View" />
             </div>
           </motion.div>
 
