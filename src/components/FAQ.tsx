@@ -101,17 +101,6 @@ const FAQ = () => {
             ))}
           </div>
         </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="text-center mt-12"
-        >
-          <p className="text-gray-400">
-            Have more questions? <a href="#contact" className="text-cyan-400 hover:text-cyan-300 transition">Contact our support team</a>
-          </p>
-        </motion.div>
       </div>
     </section>
   );
