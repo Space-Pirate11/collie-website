@@ -1,65 +1,50 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Check, X } from 'lucide-react';
+import { Check, X, Loader2 } from 'lucide-react';
+import { products } from '../stripe-config';
+import { createCheckoutSession } from '../lib/stripe';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
 const Pricing = () => {
-  const [isAnnual, setIsAnnual] = useState(true);
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
 
-  const plans = [
-    {
-      name: "Collar + App",
-      monthlyPrice: 25,
-      annualPrice: 20,
-      features: [
-        "Smart collar device",
-        "Mobile app access",
-        "Continuous health monitoring",
-        "Personalized health insights",
-        "Activity tracking",
-        "Sleep analysis",
-        "1-year hardware warranty",
-        "30-day health data storage",
-      ],
-      notIncluded: [
-        "Veterinarian portal access",
-        "Global LTE connectivity",
-        "Extended 2-year warranty",
-        "Premium health analytics",
-        "Unlimited data storage",
-      ],
-      popular: false,
-    },
-    {
-      name: "Collar + App + LTE",
-      monthlyPrice: 35,
-      annualPrice: 30,
-      features: [
-        "Smart collar device",
-        "Mobile app access",
-        "Continuous health monitoring",
-        "Personalized health insights",
-        "Activity tracking",
-        "Sleep analysis",
-        "Veterinarian portal access",
-        "Global LTE connectivity",
-        "Extended 2-year warranty",
-        "Premium health analytics",
-        "Unlimited data storage",
-        "Priority customer support",
-      ],
-      notIncluded: [],
-      popular: true,
-    },
-  ];
+  const [isLoading, setIsLoading] = useState(false);
+  const supabase = useSupabaseClient();
 
-  const subscriptionVariants = {
-    monthly: { x: 0 },
-    annual: { x: "100%" },
+  const handlePreOrder = async () => {
+    try {
+      setIsLoading(true);
+
+      const { data: { session } } = await supabase.auth.getSession();
+
+      if (!session?.access_token) {
+        // TODO: Implement proper authentication flow
+        alert('Please sign in to continue');
+        return;
+      }
+
+      const successUrl = `${window.location.origin}/success?session_id={CHECKOUT_SESSION_ID}`;
+      const cancelUrl = `${window.location.origin}/pricing`;
+
+      const checkoutUrl = await createCheckoutSession(
+        products.collie.priceId,
+        products.collie.mode,
+        session.access_token,
+        successUrl,
+        cancelUrl
+      );
+
+      window.location.href = checkoutUrl;
+    } catch (error) {
+      console.error('Error creating checkout session:', error);
+      alert('Failed to start checkout process. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -72,7 +57,7 @@ const Pricing = () => {
             transition={{ duration: 0.6 }}
             className="section-title"
           >
-            Pricing
+            Pre-Order Now
           </motion.h2>
           <motion.p
             initial={{ opacity: 0 }}
@@ -80,122 +65,64 @@ const Pricing = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="subtitle"
           >
-            Choose the plan that's right for you and your furry friend
+            Secure your Collie with a $20 deposit
           </motion.p>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-          transition={{ duration: 0.4 }}
-          className="flex justify-center mb-12"
-        >
-          <div className="glass-card p-1 rounded-full inline-flex">
-            <div className="relative">
-              <div className="flex">
-                <button
-                  onClick={() => setIsAnnual(false)}
-                  className={`relative z-10 px-6 py-2 rounded-full text-sm font-medium transition ${
-                    !isAnnual ? "text-white" : "text-gray-400"
-                  }`}
-                >
-                  Monthly
-                </button>  
-                <button
-                  onClick={() => setIsAnnual(true)}
-                  className={`relative z-10 px-6 py-2 rounded-full text-sm font-medium transition ${
-                    isAnnual ? "text-white" : "text-gray-400"
-                  }`}
-                >
-                  Annual 
-                </button>
-              </div>
-              <motion.div
-                className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full"
-                variants={subscriptionVariants}
-                animate={isAnnual ? "annual" : "monthly"}
-                transition={{ type: "spring", stiffness: 300, damping: 25 }}
-              ></motion.div>
-            </div>
-          </div>
-        </motion.div>
 
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto"
+          className="max-w-2xl mx-auto"
         >
-          {plans.map((plan, index) => (
-            <div 
-              key={index}
-              className={`glass-card rounded-2xl overflow-hidden ${
-                plan.popular ? "border-2 border-cyan-500" : "border border-white/10"
-              }`}
-            >
-              {plan.popular && (
-                <div className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white py-1.5 px-4 text-center text-sm font-medium">
-                  Most Popular
+          <div className="glass-card rounded-2xl overflow-hidden border-2 border-cyan-500">
+            <div className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white py-1.5 px-4 text-center text-sm font-medium">
+              Limited Time Offer
+            </div>
+            
+            <div className="p-8">
+              <h3 className="text-2xl font-bold mb-4">Collie Smart Collar</h3>
+              <div className="mb-6">
+                <div className="flex items-end">
+                  <span className="text-4xl font-bold">$20</span>
+                  <span className="text-gray-400 ml-2 pb-1">deposit</span>
                 </div>
-              )}
+                <p className="text-sm text-gray-400 mt-1">
+                  Applied to final purchase price
+                </p>
+              </div>
               
-              <div className="p-8">
-                <h3 className="text-2xl font-bold mb-4">{plan.name}</h3>
-                <div className="mb-6">
-                  <div className="flex items-end">
-                    <span className="text-4xl font-bold">
-                      ${isAnnual ? plan.annualPrice : plan.monthlyPrice}
-                    </span>
-                    <span className="text-gray-400 ml-2 pb-1">
-                      {isAnnual ? "/mo" : "/mo"}
-                    </span>
-                  </div>
-                  {isAnnual && (
-                    <p className="text-sm text-gray-400 mt-1">
-                      Billed annually (${plan.annualPrice * 12})
-                    </p>
-                  )}
-                </div>
-                
-                <button 
-                  className={`w-full py-3 px-4 rounded-lg font-medium mb-8 ${
-                    plan.popular
-                      ? "bg-gradient-to-r from-cyan-500 to-purple-600 text-white"
-                      : "bg-white/10 text-white hover:bg-white/20"
-                  }`}
-                >
-                  Pre-Orders Open Soon
-                </button>
-                
-                <div>
-                  <p className="font-medium mb-4">What's included:</p>
-                  <ul className="space-y-3 mb-6">
-                    {plan.features.map((feature, i) => (
-                      <li key={i} className="flex items-start">
-                        <Check size={18} className="text-cyan-400 mt-0.5 mr-2 flex-shrink-0" />
-                        <span className="text-gray-300">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  
-                  {plan.notIncluded.length > 0 && (
-                    <>
-                      <p className="font-medium mb-4 text-gray-400">Not included:</p>
-                      <ul className="space-y-3">
-                        {plan.notIncluded.map((feature, i) => (
-                          <li key={i} className="flex items-start text-gray-500">
-                            <X size={18} className="text-gray-500 mt-0.5 mr-2 flex-shrink-0" />
-                            <span>{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </>
-                  )}
-                </div>
+              <button 
+                onClick={handlePreOrder}
+                disabled={isLoading}
+                className="w-full py-3 px-4 rounded-lg font-medium mb-8 bg-gradient-to-r from-cyan-500 to-purple-600 text-white hover:from-cyan-600 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="animate-spin mr-2" size={20} />
+                    Processing...
+                  </>
+                ) : (
+                  'Pre-Order Now'
+                )}
+              </button>
+              
+              <div>
+                <p className="font-medium mb-4">What's included:</p>
+                <ul className="space-y-3 mb-6">
+                  <Feature text="Smart collar device" />
+                  <Feature text="Mobile app access" />
+                  <Feature text="Continuous health monitoring" />
+                  <Feature text="Personalized health insights" />
+                  <Feature text="Activity tracking" />
+                  <Feature text="Sleep analysis" />
+                  <Feature text="1-year hardware warranty" />
+                  <Feature text="Priority shipping" />
+                </ul>
               </div>
             </div>
-          ))}
+          </div>
         </motion.div>
         
         <motion.div
@@ -205,12 +132,19 @@ const Pricing = () => {
           className="text-center mt-12"
         >
           <p className="text-gray-400">
-            All plans include free shipping. 30-day money-back guarantee.
+            Free shipping. 30-day money-back guarantee.
           </p>
         </motion.div>
       </div>
     </section>
   );
 };
+
+const Feature = ({ text }: { text: string }) => (
+  <li className="flex items-start">
+    <Check size={18} className="text-cyan-400 mt-0.5 mr-2 flex-shrink-0" />
+    <span className="text-gray-300">{text}</span>
+  </li>
+);
 
 export default Pricing;
