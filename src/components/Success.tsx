@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { CheckCircle, ArrowLeft } from 'lucide-react';
-import { useSupabaseClient } from '@supabase/auth-helpers-react';
+import { createBrowserClient } from '@supabase/ssr';
 
 const Success = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const [orderDetails, setOrderDetails] = useState<any>(null);
-  const supabase = useSupabaseClient();
+  const supabase = createBrowserClient(
+    import.meta.env.VITE_SUPABASE_URL,
+    import.meta.env.VITE_SUPABASE_ANON_KEY
+  );
 
   useEffect(() => {
     const fetchOrderDetails = async () => {
@@ -37,7 +40,7 @@ const Success = () => {
     };
 
     fetchOrderDetails();
-  }, [searchParams, navigate, supabase]);
+  }, [searchParams, navigate]);
 
   return (
     <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
