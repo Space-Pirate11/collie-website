@@ -6,7 +6,6 @@ import HowItWorks from './components/HowItWorks';
 import DashboardPreview from './components/DashboardPreview';
 import AnalyticsDashboard from './components/AnalyticsDashboard';
 import Benefits from './components/Benefits';
-import Pricing from './components/Pricing';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import Contact from './components/Contact';
@@ -28,7 +27,6 @@ function App() {
                 <DashboardPreview />
                 <AnalyticsDashboard />
                 <Benefits />
-                <Pricing />
                 <FAQ />
               </main>
               <Footer />

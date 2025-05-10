@@ -1,11 +1,14 @@
 import React, { useState, FormEvent, ChangeEvent } from 'react';
 import { motion } from 'framer-motion';
-import { Activity, Heart, PawPrint, BatteryMedium, Mail, ArrowRight } from 'lucide-react';
+import { Activity, Heart, PawPrint, BatteryMedium, Mail, ArrowRight, Check, Loader2 } from 'lucide-react';
+import { createCheckoutSession } from '../lib/stripe';
 
 const Hero = () => {
   const [email, setEmail] = useState<string>("");
   const [responseMessage, setResponseMessage] = useState<string>("");
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>("idle");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubscribeSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -60,6 +63,29 @@ const Hero = () => {
     }
   };
 
+  const handlePreOrder = async () => {
+    try {
+      setIsLoading(true);
+      setError(null);
+
+      const successUrl = `${window.location.origin}/success`;
+      const cancelUrl = `${window.location.origin}`;
+
+      await createCheckoutSession(
+        'price_1RN5iZG21gx2hlRpqdlfeGkl',
+        'payment',
+        null,
+        successUrl,
+        cancelUrl
+      );
+    } catch (err) {
+      console.error('Error creating checkout session:', err);
+      setError('Failed to start checkout process. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden">
       <div className="waveform-bg"></div>
@@ -79,52 +105,84 @@ const Hero = () => {
               Continuously monitor your dog's health vitals and receive early warning insights, powered by advanced AI.
             </p>
 
-            {/* Email Signup Form */}
+            {/* Pre-order Button */}
             <div className="mb-8">
-              <form onSubmit={handleSubscribeSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto md:mx-0">
-                <div className="relative flex-grow">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Mail size={18} className="text-gray-400" />
+              <div className="glass-card p-8 rounded-xl">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-6">
+                  <div>
+                    <h3 className="text-2xl font-bold mb-2">Pre-Order Now</h3>
+                    <p className="text-gray-300">Secure your Collie with a $20 deposit</p>
                   </div>
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-                    placeholder="Enter your email"
-                    required
-                    disabled={status === 'submitting'}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg pl-10 pr-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-white placeholder-gray-400 disabled:opacity-50"
-                  />
+                  <button
+                    onClick={handlePreOrder}
+                    disabled={isLoading}
+                    className="btn-primary whitespace-nowrap min-w-[200px]"
+                  >
+                    {isLoading ? (
+                      <>
+                        <Loader2 className="animate-spin mr-2" size={20} />
+                        Processing...
+                      </>
+                    ) : (
+                      'Pre-Order ($20)'
+                    )}
+                  </button>
                 </div>
-                <button
-                  type="submit"
-                  disabled={status === 'submitting' || status === 'success'}
-                  className="btn-primary whitespace-nowrap"
-                >
-                  {status === 'submitting' ? (
-                    'Subscribing...'
-                  ) : status === 'success' ? (
-                    'Subscribed!'
-                  ) : (
-                    <>Get Notified <ArrowRight size={16} className="ml-2" /></>
-                  )}
-                </button>
-              </form>
-              {/* Response Message */}
-              <div className="mt-3 min-h-[1.5rem] text-left">
-                {responseMessage && (
-                  <p className={`text-sm ${status === 'success' ? 'text-green-400' : 'text-red-400'}`}>
-                    {responseMessage}
-                  </p>
+                
+                <div className="grid grid-cols-2 gap-4">
+                  <Feature text="Smart collar device" />
+                  <Feature text="Mobile app access" />
+                  <Feature text="Health monitoring" />
+                  <Feature text="Activity tracking" />
+                  <Feature text="1-year warranty" />
+                  <Feature text="Priority shipping" />
+                </div>
+
+                {error && (
+                  <div className="mt-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400">
+                    {error}
+                  </div>
                 )}
               </div>
             </div>
 
-            {/* Action Button */}
-            <div className="flex flex-col sm:flex-row justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
-              <a href="#pricing" className="btn-primary">
-                Pre-Order ($20 Deposit)
-              </a>
+            {/* Email Signup Form */}
+            <form onSubmit={handleSubscribeSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto md:mx-0">
+              <div className="relative flex-grow">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Mail size={18} className="text-gray-400" />
+                </div>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+                  placeholder="Enter your email for updates"
+                  required
+                  disabled={status === 'submitting'}
+                  className="w-full bg-white/5 border border-white/10 rounded-lg pl-10 pr-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-white placeholder-gray-400 disabled:opacity-50"
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={status === 'submitting' || status === 'success'}
+                className="btn-outline whitespace-nowrap"
+              >
+                {status === 'submitting' ? (
+                  'Subscribing...'
+                ) : status === 'success' ? (
+                  'Subscribed!'
+                ) : (
+                  <>Get Updates <ArrowRight size={16} className="ml-2" /></>
+                )}
+              </button>
+            </form>
+            {/* Response Message */}
+            <div className="mt-3 min-h-[1.5rem] text-left">
+              {responseMessage && (
+                <p className={`text-sm ${status === 'success' ? 'text-green-400' : 'text-red-400'}`}>
+                  {responseMessage}
+                </p>
+              )}
             </div>
 
             {/* Vital Stats Grid */}
@@ -189,5 +247,12 @@ const VitalStat = ({ icon, label, value, change }: { icon: React.ReactNode, labe
     </div>
   );
 };
+
+const Feature = ({ text }: { text: string }) => (
+  <div className="flex items-start">
+    <Check size={18} className="text-cyan-400 mt-0.5 mr-2 flex-shrink-0" />
+    <span className="text-gray-300">{text}</span>
+  </div>
+);
 
 export default Hero;
