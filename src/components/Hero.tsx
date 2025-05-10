@@ -88,7 +88,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative pt-10 pb-20 md:pt-32 md:pb-32 overflow-hidden">
+    <section className="relative pt-24 pb-20 md:pt-32 md:pb-32 overflow-hidden">
       <div className="waveform-bg"></div>
 
       <div className="container-custom relative z-10">
