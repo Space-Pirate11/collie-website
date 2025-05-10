@@ -1,6 +1,6 @@
 import React, { useState, FormEvent, ChangeEvent } from 'react';
 import { motion } from 'framer-motion';
-import { Activity, Heart, PawPrint, BatteryMedium, Mail, ArrowRight, Check, Loader2, Zap, MapPin, BrainCircuit, Bell, Stethoscope, Phone } from 'lucide-react';
+import { Activity, Heart, PawPrint, BatteryMedium, Mail, ArrowRight, Check, Loader2, Zap, MapPin, BrainCircuit, Bell, Stethoscope, Phone, Moon, Clock, BarChart } from 'lucide-react';
 import { createCheckoutSession } from '../lib/stripe';
 
 const Hero = () => {
@@ -109,8 +109,59 @@ const Hero = () => {
             <div className="grid grid-cols-2 gap-4 mb-8">
               <VitalStat icon={<Heart size={24} className="text-cyan-400" />} label="Heart Rate" value="75 bpm" change="+2%" />
               <VitalStat icon={<Activity size={24} className="text-purple-400" />} label="Activity" value="Active" change="20 min" />
-              <VitalStat icon={<PawPrint size={24} className="text-cyan-400" />} label="Steps" value="2,457" change="+15%" />
-              <VitalStat icon={<BatteryMedium size={24} className="text-purple-400" />} label="Battery" value="85%" change="3.2 days" />
+              <VitalStat icon={<Moon size={24} className="text-cyan-400" />} label="Sleep" value="8.2 hrs" change="Deep" />
+              <VitalStat icon={<Clock size={24} className="text-purple-400" />} label="History" value="30 days" change="↑ 15%" />
+            </div>
+
+            {/* Sleep Analysis Widget */}
+            <div className="glass-card p-6 rounded-xl mb-6">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2">
+                  <Moon className="text-cyan-400" size={20} />
+                  <h3 className="text-lg font-semibold">Sleep Analysis</h3>
+                </div>
+                <span className="text-sm text-gray-400">Last Night</span>
+              </div>
+              <div className="h-4 bg-white/10 rounded-full overflow-hidden flex mb-3">
+                <div className="bg-cyan-400/80 w-3/12" title="Deep Sleep"></div>
+                <div className="bg-purple-400/80 w-5/12" title="Light Sleep"></div>
+                <div className="bg-blue-400/80 w-2/12" title="REM"></div>
+                <div className="bg-gray-400/80 w-2/12" title="Awake"></div>
+              </div>
+              <div className="grid grid-cols-4 text-xs text-gray-400">
+                <div>Deep: 2.5h</div>
+                <div>Light: 4h</div>
+                <div>REM: 1.5h</div>
+                <div>Awake: 0.2h</div>
+              </div>
+            </div>
+
+            {/* Activity History Widget */}
+            <div className="glass-card p-6 rounded-xl mb-8">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2">
+                  <BarChart className="text-purple-400" size={20} />
+                  <h3 className="text-lg font-semibold">Weekly Activity</h3>
+                </div>
+              </div>
+              <div className="flex items-end justify-between h-24 mb-2">
+                {[65, 45, 75, 50, 85, 60, 70].map((height, i) => (
+                  <div
+                    key={i}
+                    className="w-8 rounded-t-sm bg-gradient-to-t from-cyan-500 to-purple-500 opacity-80"
+                    style={{ height: `${height}%` }}
+                  ></div>
+                ))}
+              </div>
+              <div className="flex justify-between text-xs text-gray-400">
+                <span>M</span>
+                <span>T</span>
+                <span>W</span>
+                <span>T</span>
+                <span>F</span>
+                <span>S</span>
+                <span>S</span>
+              </div>
             </div>
 
             {/* Email Signup Form */}
