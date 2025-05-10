@@ -102,7 +102,7 @@ const Hero = () => {
               Collie: The World's Smartest Dog Collar
             </h1>
             
-            <div className="glass-card inline-block p-10 rounded-xl mb-8 bg-white/5">
+            <div className="glass-card inline-block p-4 rounded-xl mb-8 bg-white/5">
               <p className="text-white font-extrabold text-xl">Going to the vet sucks. Collie changes that.</p>
             </div>
 
