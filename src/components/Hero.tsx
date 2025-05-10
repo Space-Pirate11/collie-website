@@ -1,6 +1,6 @@
 import React, { useState, FormEvent, ChangeEvent } from 'react';
 import { motion } from 'framer-motion';
-import { Activity, Heart, PawPrint, BatteryMedium, Mail, ArrowRight, Check, Loader2, Zap, MapPin, BrainCircuit, Bell } from 'lucide-react';
+import { Activity, Heart, PawPrint, BatteryMedium, Mail, ArrowRight, Check, Loader2, Zap, MapPin, BrainCircuit, Bell, Stethoscope, Phone } from 'lucide-react';
 import { createCheckoutSession } from '../lib/stripe';
 
 const Hero = () => {
@@ -160,11 +160,18 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="space-y-6"
           >
+            <img
+              src="/sni.png"
+              alt="Collie Smart Collar on a dog"
+              className="w-full aspect-video object-cover rounded-2xl mb-8"
+            />
+
             {/* Product Selection */}
             <div className="flex gap-4 mb-6">
               <ProductCard
                 title="Lite"
-                price="$149"
+                price="$59"
+                subscription="$5/mo"
                 isSelected={selectedProduct === 'lite'}
                 onClick={() => setSelectedProduct('lite')}
                 features={[
@@ -172,16 +179,19 @@ const Hero = () => {
                   { icon: <PawPrint size={18} />, text: "Scratch & lick detection" },
                   { icon: <BatteryMedium size={18} />, text: "2-month battery life" },
                   { icon: <BrainCircuit size={18} />, text: "AI-powered insights" },
+                  { icon: <Stethoscope size={18} />, text: "Optional vet connection" },
                 ]}
               />
               <ProductCard
                 title="Pro"
-                price="$299"
+                price="$249"
+                subscription="$10/mo"
                 isSelected={selectedProduct === 'pro'}
                 onClick={() => setSelectedProduct('pro')}
                 features={[
                   { icon: <Heart size={18} />, text: "Vital monitoring (HR, RR, HRV)" },
                   { icon: <MapPin size={18} />, text: "GPS tracking & geofencing" },
+                  { icon: <Phone size={18} />, text: "Cellular connectivity" },
                   { icon: <Bell size={18} />, text: "Emergency alerts" },
                   { icon: <Zap size={18} />, text: "All Lite features included" },
                 ]}
@@ -239,6 +249,7 @@ const VitalStat = ({ icon, label, value, change }: { icon: React.ReactNode, labe
 interface ProductCardProps {
   title: string;
   price: string;
+  subscription: string;
   isSelected: boolean;
   onClick: () => void;
   features: Array<{
@@ -247,17 +258,18 @@ interface ProductCardProps {
   }>;
 }
 
-const ProductCard = ({ title, price, isSelected, onClick, features }: ProductCardProps) => (
+const ProductCard = ({ title, price, subscription, isSelected, onClick, features }: ProductCardProps) => (
   <div
     onClick={onClick}
     className={`glass-card p-6 rounded-xl cursor-pointer transition-all duration-300 flex-1 ${
       isSelected ? 'border-2 border-cyan-500 bg-white/10' : 'border border-white/10 hover:bg-white/10'
     }`}
   >
-    <div className="flex items-center justify-between mb-4">
+    <div className="flex items-center justify-between mb-2">
       <h3 className="text-xl font-bold">{title}</h3>
       <div className="text-2xl font-bold text-cyan-400">{price}</div>
     </div>
+    <p className="text-sm text-gray-400 mb-4">{subscription} for data & vet connection</p>
     <ul className="space-y-3">
       {features.map((feature, index) => (
         <li key={index} className="flex items-center gap-2 text-sm">
