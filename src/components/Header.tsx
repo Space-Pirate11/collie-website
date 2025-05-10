@@ -47,8 +47,8 @@ const Header = () => {
         {/* --- Action Buttons --- */}
         {/* This div remains positioned by the parent's justify-between */}
         <div className="hidden md:flex space-x-4">
-          <a href="#pricing" className="btn-outline">Pre-Order</a>
-          <a href="#contact" className="btn-primary">Join Beta</a>
+          <a href="#pricing" className="btn-outline">Pre-Order ($20)</a>
+          <a href="#contact" className="btn-primary">Get Notified</a>
         </div>
         {/* --- End Action Buttons --- */}
         
@@ -78,8 +78,8 @@ const Header = () => {
             <a href="#pricing" className="text-gray-300 hover:text-white transition py-2 px-4 rounded hover:bg-white/5" onClick={() => setIsMobileMenuOpen(false)}>Pricing</a>
             <a href="#faq" className="text-gray-300 hover:text-white transition py-2 px-4 rounded hover:bg-white/5" onClick={() => setIsMobileMenuOpen(false)}>FAQ</a>
             <div className="flex flex-col space-y-2 pt-2">
-              <a href="#pricing" className="btn-outline w-full text-center" onClick={() => setIsMobileMenuOpen(false)}>Pre-order</a>
-              <a href="#contact" className="btn-primary w-full text-center" onClick={() => setIsMobileMenuOpen(false)}>Join Beta</a>
+              <a href="#pricing" className="btn-outline w-full text-center" onClick={() => setIsMobileMenuOpen(false)}>Pre-order ($20)</a>
+              <a href="#contact" className="btn-primary w-full text-center" onClick={() => setIsMobileMenuOpen(false)}>Get Notified</a>
             </div>
           </div>
         </div>
