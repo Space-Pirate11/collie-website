@@ -105,7 +105,7 @@ const Hero = () => {
             <div className="glass-card p-6 rounded-xl mb-8 bg-gradient-to-br from-white/5 to-white/10 border border-white/10">
               <h2 className="text-xl font-bold mb-3 text-cyan-400">The Vision</h2>
               <p className="text-gray-300">
-                Going to the vet sucks. Collie continuously monitors your dog's health vitals and activity. Powered by advanced AI trained specifically on your dog, Collie gives early warning insights, recommends diet and activity changes, refills prescriptions, and seamlessly connects with your vet for serious issues.
+                Going to the vet sucks. Collie changes that.
               </p>
             </div>
 
