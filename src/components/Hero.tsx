@@ -1,6 +1,6 @@
 import React, { useState, FormEvent, ChangeEvent } from 'react';
 import { motion } from 'framer-motion';
-import { Activity, Heart, PawPrint, BatteryMedium, Mail, ArrowRight, Check, Loader2 } from 'lucide-react';
+import { Activity, Heart, PawPrint, BatteryMedium, Mail, ArrowRight, Check, Loader2, Zap, MapPin, BrainCircuit, Bell } from 'lucide-react';
 import { createCheckoutSession } from '../lib/stripe';
 
 const Hero = () => {
@@ -9,6 +9,7 @@ const Hero = () => {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>("idle");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<'lite' | 'pro'>('pro');
 
   const handleSubscribeSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -152,53 +153,63 @@ const Hero = () => {
             </div>
           </motion.div>
 
-          {/* Right Column: Pre-order Card */}
+          {/* Right Column: Product Cards */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
+            className="space-y-6"
           >
-            <div className="glass-card p-8 rounded-3xl">
-              <img
-                src="/sni.png"
-                alt="Collie Smart Collar on a dog"
-                className="w-full aspect-square object-cover rounded-2xl mb-8"
+            {/* Product Selection */}
+            <div className="flex gap-4 mb-6">
+              <ProductCard
+                title="Lite"
+                price="$149"
+                isSelected={selectedProduct === 'lite'}
+                onClick={() => setSelectedProduct('lite')}
+                features={[
+                  { icon: <Activity size={18} />, text: "3-axis IMU activity tracking" },
+                  { icon: <PawPrint size={18} />, text: "Scratch & lick detection" },
+                  { icon: <BatteryMedium size={18} />, text: "2-month battery life" },
+                  { icon: <BrainCircuit size={18} />, text: "AI-powered insights" },
+                ]}
               />
+              <ProductCard
+                title="Pro"
+                price="$299"
+                isSelected={selectedProduct === 'pro'}
+                onClick={() => setSelectedProduct('pro')}
+                features={[
+                  { icon: <Heart size={18} />, text: "Vital monitoring (HR, RR, HRV)" },
+                  { icon: <MapPin size={18} />, text: "GPS tracking & geofencing" },
+                  { icon: <Bell size={18} />, text: "Emergency alerts" },
+                  { icon: <Zap size={18} />, text: "All Lite features included" },
+                ]}
+              />
+            </div>
 
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <h3 className="text-2xl font-bold">Collie</h3>
-                  <p className="text-gray-400">Smart Health Collar</p>
-                </div>
-                <button
-                  onClick={handlePreOrder}
-                  disabled={isLoading}
-                  className="btn-primary whitespace-nowrap"
-                >
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="animate-spin mr-2" size={20} />
-                      Processing...
-                    </>
-                  ) : (
-                    'Pre-Order ($20)'
-                  )}
-                </button>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4 mb-6">
-                <Feature text="Smart collar device" />
-                <Feature text="Mobile app access" />
-                <Feature text="Continuous monitoring" />
-                <Feature text="Activity tracking" />
-                <Feature text="Sleep analysis" />
-                <Feature text="Early warning system" />
-                <Feature text="1-year warranty" />
-                <Feature text="Priority shipping" />
-              </div>
+            {/* Pre-order Button */}
+            <div className="glass-card p-6 rounded-xl text-center">
+              <button
+                onClick={handlePreOrder}
+                disabled={isLoading}
+                className="btn-primary w-full mb-3"
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="animate-spin mr-2" size={20} />
+                    Processing...
+                  </>
+                ) : (
+                  'Pre-Order Now ($20 Deposit)'
+                )}
+              </button>
+              <p className="text-sm text-gray-400">
+                Deposit will be applied to your choice of Lite or Pro at shipping
+              </p>
 
               {error && (
-                <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400">
+                <div className="mt-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400">
                   {error}
                 </div>
               )}
@@ -225,10 +236,36 @@ const VitalStat = ({ icon, label, value, change }: { icon: React.ReactNode, labe
   );
 };
 
-const Feature = ({ text }: { text: string }) => (
-  <div className="flex items-start">
-    <Check size={18} className="text-cyan-400 mt-0.5 mr-2 flex-shrink-0" />
-    <span className="text-gray-300">{text}</span>
+interface ProductCardProps {
+  title: string;
+  price: string;
+  isSelected: boolean;
+  onClick: () => void;
+  features: Array<{
+    icon: React.ReactNode;
+    text: string;
+  }>;
+}
+
+const ProductCard = ({ title, price, isSelected, onClick, features }: ProductCardProps) => (
+  <div
+    onClick={onClick}
+    className={`glass-card p-6 rounded-xl cursor-pointer transition-all duration-300 flex-1 ${
+      isSelected ? 'border-2 border-cyan-500 bg-white/10' : 'border border-white/10 hover:bg-white/10'
+    }`}
+  >
+    <div className="flex items-center justify-between mb-4">
+      <h3 className="text-xl font-bold">{title}</h3>
+      <div className="text-2xl font-bold text-cyan-400">{price}</div>
+    </div>
+    <ul className="space-y-3">
+      {features.map((feature, index) => (
+        <li key={index} className="flex items-center gap-2 text-sm">
+          <span className="text-cyan-400">{feature.icon}</span>
+          <span className="text-gray-300">{feature.text}</span>
+        </li>
+      ))}
+    </ul>
   </div>
 );
 
