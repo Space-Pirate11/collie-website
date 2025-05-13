@@ -159,9 +159,9 @@ const Hero = () => {
             {/* Vital Stats Grid */}
             <div className="grid grid-cols-2 gap-4 mb-8">
               <VitalStat icon={<Heart size={24} className="text-cyan-400" />} label="Heart Rate" value="75 bpm" change="+2%" />
-              <VitalStat icon={<Activity size={24} className="text-purple-400" />} label="Activity" value="Active" change="20 min" />
-              <VitalStat icon={<PawPrint size={24} className="text-cyan-400" />} label="Steps" value="2,457" change="+15%" />
-              <VitalStat icon={<BatteryMedium size={24} className="text-purple-400" />} label="Battery" value="85%" change="3.2 days" />
+              <VitalStat icon={<Activity size={24} className="text-purple-400" />} label="Activity" value="Active" change="24 min" />
+              <VitalStat icon={<PawPrint size={24} className="text-cyan-400" />} label="Steps" value="8,457" change="+15%" />
+              <VitalStat icon={<BatteryMedium size={24} className="text-purple-400" />} label="Battery" value="85%" change="2 months" />
               <VitalStat icon={<Moon size={24} className="text-cyan-400" />} label="Sleep" value="8h 32m" change="Deep" />
               <VitalStat icon={<History size={24} className="text-purple-400" />} label="History" value="30 days" change="View" />
             </div>
@@ -184,14 +184,14 @@ const Hero = () => {
             <div className="grid grid-cols-2 gap-4 flex-grow">
               <ProductCard
                 title="Lite"
-                price="$59"
-                subscription="$5/mo"
+                price="$29"
+                subscription="$3/mo"
                 isSelected={selectedProduct === 'lite'}
                 onClick={() => setSelectedProduct('lite')}
                 features={[
-                  { icon: <Activity size={18} />, text: "3-axis IMU activity tracking" },
-                  { icon: <PawPrint size={18} />, text: "Scratch & lick detection" },
-                  { icon: <BatteryMedium size={18} />, text: "2-month battery life" },
+                  { icon: <Activity size={18} />, text: "6-axis IMU activity tracking" },
+                  { icon: <PawPrint size={18} />, text: "Injury and disease detection" },
+                  { icon: <BatteryMedium size={18} />, text: "3-month battery life" },
                   { icon: <Stethoscope size={18} />, text: "AI-powered insights" },
                   { icon: <BrainCircuit size={18} />, text: "Find My Network compatible" },
                 ]}
