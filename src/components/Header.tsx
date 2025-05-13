@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { createCheckoutSession } from '../lib/stripe';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -12,6 +15,37 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleContactClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const contactSection = document.getElementById('contact-section');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+      setIsMobileMenuOpen(false);
+    }
+  };
+
+  const handlePreOrder = async () => {
+    try {
+      setIsLoading(true);
+      setError(null);
+
+      const successUrl = `${window.location.origin}/success`;
+      const cancelUrl = `${window.location.origin}`;
+
+      await createCheckoutSession(
+        'price_1RN5iZG21gx2hlRpqdlfeGkl',
+        'payment',
+        null,
+        successUrl,
+        cancelUrl
+      );
+    } catch (err) {
+      console.error('Error creating checkout session:', err);
+      setError('Failed to start checkout process. Please try again.');
+      setIsLoading(false);
+    }
+  };
 
   return (
     <header 
@@ -35,11 +69,17 @@ const Header = () => {
           <a href="#how-it-works" className="text-gray-300 hover:text-white transition">How It Works</a>
           <a href="#benefits" className="text-gray-300 hover:text-white transition">Benefits</a>
           <a href="#faq" className="text-gray-300 hover:text-white transition">FAQ</a>
-          <a href="#contact" className="text-gray-300 hover:text-white transition">Contact</a>
+          <a href="#contact-section" onClick={handleContactClick} className="text-gray-300 hover:text-white transition">Contact</a>
         </nav>
         
         <div className="hidden md:flex space-x-4">
-          <button onClick={() => window.scrollTo(0, 0)} className="btn-primary">Pre-Order Now</button>
+          <button 
+            onClick={handlePreOrder}
+            disabled={isLoading}
+            className="btn-primary"
+          >
+            {isLoading ? 'Processing...' : 'Pre-Order Now'}
+          </button>
         </div>
         
         <button 
@@ -63,10 +103,20 @@ const Header = () => {
             <a href="#how-it-works" className="text-gray-300 hover:text-white transition py-2 px-4 rounded hover:bg-white/5" onClick={() => setIsMobileMenuOpen(false)}>How It Works</a>
             <a href="#benefits" className="text-gray-300 hover:text-white transition py-2 px-4 rounded hover:bg-white/5" onClick={() => setIsMobileMenuOpen(false)}>Benefits</a>
             <a href="#faq" className="text-gray-300 hover:text-white transition py-2 px-4 rounded hover:bg-white/5" onClick={() => setIsMobileMenuOpen(false)}>FAQ</a>
-            <a href="#contact" className="text-gray-300 hover:text-white transition py-2 px-4 rounded hover:bg-white/5" onClick={() => setIsMobileMenuOpen(false)}>Contact</a>
+            <a href="#contact-section" onClick={handleContactClick} className="text-gray-300 hover:text-white transition py-2 px-4 rounded hover:bg-white/5">Contact</a>
             <div className="flex flex-col space-y-2 pt-2">
-              <button onClick={() => window.scrollTo(0, 0)} className="btn-primary w-full">Pre-Order Now</button>
+              <button onClick={handlePreOrder} disabled={isLoading} className="btn-primary w-full">
+                {isLoading ? 'Processing...' : 'Pre-Order Now'}
+              </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {error && (
+        <div className="absolute top-full left-0 right-0 mt-2 px-4">
+          <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-3 rounded-lg text-sm text-center">
+            {error}
           </div>
         </div>
       )}
