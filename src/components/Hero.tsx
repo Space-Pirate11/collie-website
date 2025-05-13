@@ -198,11 +198,11 @@ const Hero = () => {
                 isSelected={selectedProduct === 'pro'}
                 onClick={() => setSelectedProduct('pro')}
                 features={[
+                  { icon: <Zap size={18} />, text: "All Lite features included" 
                   { icon: <Heart size={18} />, text: "Vital monitoring (HR, RR, HRV)" },
                   { icon: <MapPin size={18} />, text: "GPS tracking & geofencing" },
                   { icon: <Phone size={18} />, text: "Cellular connectivity" },
                   { icon: <Bell size={18} />, text: "Emergency alerts" },
-                  { icon: <Zap size={18} />, text: "All Lite features included" },
                 ]}
               />
             </div>
