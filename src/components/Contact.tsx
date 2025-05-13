@@ -118,7 +118,7 @@ function Contact() {
 
         {/* Right Column: Contact Form - Updated Styles */}
         <div className="glass-card p-8 sm:p-10 rounded-xl h-full flex flex-col justify-center"> {/* Use glass-card style */}
-          <h3 className="text-2xl font-semibold text-gray-200 mb-3 text-center">Send Us a Message</h3>
+          <h3 className="text-2xl font-semibold text-gray-200 mb-2 text-center">Send Us a Message</h3>
           {/* Status Message Area - Updated Styles */}
           <div className="mb-4 min-h-[3rem]">
             {formStatus.submitted && (
