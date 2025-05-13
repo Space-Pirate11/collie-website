@@ -30,7 +30,7 @@ const FAQ = () => {
     },
     {
       question: "How long does the battery last?",
-      answer: "The Collie collar's rechargeable battery typically lasts 5-7 days on a single charge, depending on usage and settings. Charging takes approximately 2 hours using the included magnetic charging cable."
+      answer: "Collie Lite lasts up to 3 months on a replaceable coin-cell battery. Collie Pro's rechargeable battery typically lasts 2 weeks, depending on usage and settings. Charging takes approximately 2 hour using the included magnetic charging cable."
     },
     {
       question: "Can Collie replace regular vet visits?",
