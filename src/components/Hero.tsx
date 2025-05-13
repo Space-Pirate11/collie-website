@@ -180,7 +180,7 @@ const Hero = () => {
               <ProductCard
                 title="Lite"
                 price="$29"
-                subscription="$3/mo"
+                subscription="$3/mo for advanced analysis and vet connection"
                 isSelected={selectedProduct === 'lite'}
                 onClick={() => setSelectedProduct('lite')}
                 features={[
@@ -194,7 +194,7 @@ const Hero = () => {
               <ProductCard
                 title="Pro"
                 price="$249"
-                subscription="$10/mo"
+                subscription="$10/mo for global LTE connectivity"
                 isSelected={selectedProduct === 'pro'}
                 onClick={() => setSelectedProduct('pro')}
                 features={[
@@ -277,7 +277,7 @@ const ProductCard = ({ title, price, subscription, isSelected, onClick, features
       <h3 className="text-xl font-bold">{title}</h3>
       <div className="text-2xl font-bold text-cyan-400">{price}</div>
     </div>
-    <p className="text-sm text-gray-400 mb-4">{subscription} for data & vet connection</p>
+    <p className="text-sm text-gray-400 mb-4">{subscription}</p>
     <ul className="space-y-3 flex-grow">
       {features.map((feature, index) => (
         <li key={index} className="flex items-center gap-2 text-sm">
