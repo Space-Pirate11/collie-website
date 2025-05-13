@@ -190,7 +190,7 @@ function Contact() {
                 placeholder="Your Message"
                 required
                  // Match footer input style (adjust padding for icon)
-                className="w-full bg-white/5 border border-white/10 rounded-lg pl-10 pr-4 py-1.5 flex-grow focus:outline-none focus:ring-2 focus:ring-cyan-500 text-white placeholder-gray-400 disabled:opacity-50 resize-none"
+                className="w-full bg-white/5 border border-white/10 rounded-lg pl-10 pr-4 py-1.55 flex-grow focus:outline-none focus:ring-2 focus:ring-cyan-500 text-white placeholder-gray-400 disabled:opacity-50 resize-none"
                 disabled={formStatus.submitting || formStatus.submitted}
               ></textarea>
             </div>
