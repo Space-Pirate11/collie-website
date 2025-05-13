@@ -259,6 +259,8 @@ const AnalyticsDashboard = () => {
                         interval={0}
                         padding={{ left: 10, right: 10 }}
                         ticks={['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']}
+                        tick={{ fontSize: 12 }}
+                        height={20}
                       />
                       <YAxis domain={[0, 100]} hide />
                       <Tooltip
@@ -288,8 +290,8 @@ const AnalyticsDashboard = () => {
               <div className="glass-card p-6 rounded-xl col-span-1 flex flex-col justify-between h-48">
                 <div>
                   <h4 className="text-sm text-gray-400 mb-2">Battery Status</h4>
-                  <div className="flex items-center gap-2 mb-4">
-                    <BatteryMedium className="text-green-500" />
+                  <div className="flex items-center gap-2 mb-4 flex-wrap">
+                    <BatteryMedium size={16} className="text-success-500 flex-shrink-0" />
                     <span className="text-2xl font-bold">85%</span>
                   </div>
                 </div>
