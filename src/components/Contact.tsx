@@ -178,7 +178,7 @@ function Contact() {
             {/* Message Textarea */}
             <div className="relative">
               <label htmlFor="contact-message" className="sr-only">Message</label>
-               <div className="absolute top-3 left-0 pl-0 flex items-start pointer-events-none">
+               <div className="absolute top-3 left-0 pl-3 flex items-start pointer-events-none">
                    <MessageSquare size={18} className="text-gray-400" />
                </div>
               <textarea
