@@ -120,7 +120,7 @@ function Contact() {
         <div className="glass-card p-8 sm:p-10 rounded-xl h-full flex flex-col justify-center"> {/* Use glass-card style */}
           <h3 className="text-2xl font-semibold text-gray-200 mb-6 text-center">Send Us a Message</h3>
           {/* Status Message Area - Updated Styles */}
-          <div className="mb-4 min-h-[10rem]">
+          <div className="mb-4 min-h-[0.5rem]">
             {formStatus.submitted && (
               // Match footer success style
               <p className="text-center text-green-400 p-3 rounded-md bg-green-900/30 border border-green-700/50">
