@@ -180,7 +180,7 @@ const Hero = () => {
               <ProductCard
                 title="Lite"
                 price="$29"
-                subscription="$3/mo for advanced AI analysis"
+                subscription="$3/mo for AI analysis"
                 isSelected={selectedProduct === 'lite'}
                 onClick={() => setSelectedProduct('lite')}
                 features={[
