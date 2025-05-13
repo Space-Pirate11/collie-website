@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Heart, Activity, BatteryMedium, Moon } from 'lucide-react';
+import { Heart, Activity, BatteryMedium, Moon, Calendar, BarChart3 } from 'lucide-react';
 import {
   LineChart,
   Line,
@@ -103,14 +103,12 @@ const AnalyticsDashboard = () => {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8">
-          {/* ---------- Left column ---------- */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
             transition={{ duration: 0.8 }}
             className="space-y-6"
           >
-            {/* Heart rate */}
             <div className="glass-card p-6 rounded-xl">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
@@ -147,7 +145,6 @@ const AnalyticsDashboard = () => {
               </div>
             </div>
 
-            {/* Daily activity */}
             <div className="glass-card p-6 rounded-xl">
               <div className="flex items-center gap-2 mb-4">
                 <Activity className="text-purple-500" size={20} />
@@ -192,21 +189,18 @@ const AnalyticsDashboard = () => {
             </div>
           </motion.div>
 
-          {/* ---------- Right column ---------- */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="space-y-6"
           >
-            {/* Sleep analysis */}
             <div className="glass-card p-6 rounded-xl">
               <div className="flex items-center gap-2 mb-4">
                 <Moon className="text-purple-500" size={20} />
                 <h3 className="text-lg font-semibold">Sleep Analysis</h3>
               </div>
 
-              {/* Timeline */}
               <div className="mb-6 p-4 bg-charcoal/50 rounded-lg">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-sm text-gray-400">10:00 PM – 6:00 AM</span>
@@ -227,7 +221,6 @@ const AnalyticsDashboard = () => {
                 </div>
               </div>
 
-              {/* Summary */}
               <div className="grid grid-cols-2 gap-4">
                 {sleepSummary.map((item, i) => (
                   <div key={i} className="flex items-center gap-2">
@@ -241,9 +234,7 @@ const AnalyticsDashboard = () => {
               </div>
             </div>
 
-            {/* Weekly trend + battery */}
             <div className="grid grid-cols-3 gap-6 items-stretch">
-              {/* Weekly activity – fixed height to match left cards */}
               <div className="glass-card p-6 rounded-xl col-span-2 flex flex-col h-48">
                 <h4 className="text-sm text-gray-400 mb-2">Weekly Activity Trend</h4>
                 <div className="text-2xl font-bold mb-2">
@@ -258,9 +249,8 @@ const AnalyticsDashboard = () => {
                         stroke="#9CA3AF"
                         interval={0}
                         padding={{ left: 10, right: 10 }}
-                        ticks={['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']}
-                        tick={{ fontSize: 12 }}
-                        height={20}
+                        tick={{ fontSize: 11 }}
+                        height={30}
                       />
                       <YAxis domain={[0, 100]} hide />
                       <Tooltip
@@ -286,16 +276,15 @@ const AnalyticsDashboard = () => {
                 </div>
               </div>
 
-              {/* Battery – same fixed height */}
               <div className="glass-card p-6 rounded-xl col-span-1 flex flex-col justify-between h-48">
                 <div>
                   <h4 className="text-sm text-gray-400 mb-2">Battery Status</h4>
-                  <div className="flex items-center gap-2 mb-4 flex-wrap">
+                  <div className="flex items-center gap-2 mb-4">
                     <BatteryMedium size={16} className="text-success-500 flex-shrink-0" />
                     <span className="text-2xl font-bold">85%</span>
                   </div>
                 </div>
-                <p className="text-sm text-gray-400">5 days, 3 hours remaining</p>
+                <p className="text-sm text-gray-400">5 days, 3h left</p>
               </div>
             </div>
           </motion.div>
