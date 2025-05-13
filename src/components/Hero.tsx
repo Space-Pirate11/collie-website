@@ -14,7 +14,6 @@ const Hero = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Reset loading state when navigating back
   useEffect(() => {
     if (location.key) {
       setIsLoading(false);
@@ -114,9 +113,9 @@ const Hero = () => {
             
             <div className="glass-card inline-block p-4 rounded-xl mb-8 bg-white/5">
               <p className="text-white font-extrabold text-xl">Going to the vet sucks. Collie changes that.</p>
+              <p className="text-gray-300 text-sm mt-2">AirTag isn't for dogs. Collie is.</p>
             </div>
 
-            {/* Email Signup Form */}
             <form onSubmit={handleSubscribeSubmit} className="flex flex-col sm:flex-row gap-3">
               <div className="relative flex-grow">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -147,7 +146,6 @@ const Hero = () => {
               </button>
             </form>
 
-            {/* Response Message */}
             <div className="min-h-[1.5rem]">
               {responseMessage && (
                 <p className={`text-sm ${status === 'success' ? 'text-green-400' : 'text-red-400'}`}>
@@ -156,8 +154,7 @@ const Hero = () => {
               )}
             </div>
 
-            {/* Vital Stats Grid */}
-            <div className="grid grid-cols-2 gap-4 mb-8">
+            <div className="grid grid-cols-2 gap-4">
               <VitalStat icon={<Heart size={24} className="text-cyan-400" />} label="Heart Rate" value="75 bpm" change="+2%" />
               <VitalStat icon={<Activity size={24} className="text-purple-400" />} label="Activity" value="Active" change="24 min" />
               <VitalStat icon={<PawPrint size={24} className="text-cyan-400" />} label="Steps" value="8,457" change="+15%" />
@@ -167,7 +164,6 @@ const Hero = () => {
             </div>
           </motion.div>
 
-          {/* Right Column: Product Cards */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -180,7 +176,6 @@ const Hero = () => {
               className="w-full aspect-video object-cover rounded-2xl mb-8"
             />
 
-            {/* Product Selection */}
             <div className="grid grid-cols-2 gap-4 flex-grow">
               <ProductCard
                 title="Lite"
@@ -212,7 +207,6 @@ const Hero = () => {
               />
             </div>
 
-            {/* Pre-order Button */}
             <div className="glass-card p-6 rounded-xl text-center mt-6">
               <button
                 onClick={handlePreOrder}
