@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        charcoal: '#0D0F12',
-        midnight: '#121620',
+        charcoal: '#0F172A',
+        midnight: '#1E293B',
         cyan: {
           400: '#22D3EE',
           500: '#06B6D4',
