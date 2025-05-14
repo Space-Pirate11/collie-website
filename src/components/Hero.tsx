@@ -108,7 +108,7 @@ const Hero = () => {
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
-              Collie: The World's Smartest Dog Collar
+              Collie
             </h1>
             
             <div className="glass-card inline-block p-4 rounded-xl mb-8 bg-white/5">
