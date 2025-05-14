@@ -9,12 +9,12 @@
   }
   
   body {
-    @apply text-gray-800 bg-gradient-to-b from-charcoal to-midnight;
+    @apply text-gray-100 bg-gradient-to-b from-charcoal to-midnight;
     overflow-x: hidden;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold tracking-tight text-gray-900;
+    @apply font-bold tracking-tight;
   }
   
   h1 {
@@ -52,11 +52,11 @@
   }
   
   .btn-outline {
-    @apply btn border-2 border-gray-200 hover:bg-gray-100 text-gray-800 focus:ring-gray-300;
+    @apply btn border-2 border-white/20 hover:bg-white/10 text-white focus:ring-white;
   }
   
   .glass-card {
-    @apply bg-white/80 backdrop-blur-lg border border-gray-200 rounded-2xl shadow-lg;
+    @apply bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl shadow-xl;
   }
   
   .section {
@@ -64,11 +64,11 @@
   }
   
   .section-title {
-    @apply text-3xl md:text-4xl font-bold mb-8 text-center text-gray-900;
+    @apply text-3xl md:text-4xl font-bold mb-8 text-center;
   }
   
   .subtitle {
-    @apply text-xl md:text-2xl font-medium text-gray-600 mb-6 max-w-3xl mx-auto text-center;
+    @apply text-xl md:text-2xl font-medium text-gray-300 mb-6 max-w-3xl mx-auto text-center;
   }
 }
 
@@ -78,7 +78,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.1;
+  opacity: 0.15;
   z-index: 0;
   background-image: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='graph' x='0' y='0' width='100' height='100' patternUnits='userSpaceOnUse'%3E%3Cpath d='M0 75 Q 25 50, 50 75 T 100 75' stroke='%2364B5F6' fill='none' stroke-width='1'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23graph)'/%3E%3C/svg%3E");
 }
