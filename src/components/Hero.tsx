@@ -112,7 +112,7 @@ const Hero = () => {
             </h1>
             
             <div className="glass-card inline-block p-4 rounded-xl mb-8 bg-white/5">
-              <p className="text-gray-400 font-extrabold text-xl">Collie keeps tabs on your dog's health 24/7.</p>
+              <p className="text-black-400 font-extrabold text-xl">Collie keeps tabs on your dog's health 24/7.</p>
               <p className="text-gray-300 text-sm mt-2">All in an AirTag sized module. Going to the vet sucks. We're changing that.</p>
             </div>
 
