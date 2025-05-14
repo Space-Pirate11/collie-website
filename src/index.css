@@ -30,7 +30,7 @@
   }
   
   p {
-    @apply text-base md:text-lg leading-relaxed text-gray-600;
+    @apply text-base md:text-lg leading-relaxed text-gray-800;
   }
 }
 
@@ -52,7 +52,7 @@
   }
   
   .btn-outline {
-    @apply btn border-2 border-gray-200 hover:bg-gray-50 text-gray-700 focus:ring-gray-200;
+    @apply btn border-2 border-gray-800 hover:bg-gray-50 text-gray-800 focus:ring-gray-800;
   }
   
   .glass-card {
@@ -68,7 +68,7 @@
   }
   
   .subtitle {
-    @apply text-xl md:text-2xl font-medium text-gray-600 mb-6 max-w-3xl mx-auto text-center;
+    @apply text-xl md:text-2xl font-medium text-gray-800 mb-6 max-w-3xl mx-auto text-center;
   }
 }
 
