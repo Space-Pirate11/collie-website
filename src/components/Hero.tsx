@@ -112,7 +112,7 @@ const Hero = () => {
             </h1>
             
             <div className="glass-card inline-block p-4 rounded-xl mb-8 bg-white/5">
-              <p className="text-white-400 font-extrabold text-xl">Collie keeps tabs on your dog's health 24/7.</p>
+              <p className="text-white font-extrabold text-xl">Collie keeps tabs on your dog's health 24/7.</p>
               <p className="text-gray-300 text-sm mt-2">All in an AirTag sized module. Going to the vet sucks. We're changing that.</p>
             </div>
 
@@ -180,7 +180,7 @@ const Hero = () => {
               <ProductCard
                 title="Lite"
                 price="$29"
-                subscription="$3/mo for advanced analysis and vet connection"
+                subscription="$3/mo for AI analysis"
                 isSelected={selectedProduct === 'lite'}
                 onClick={() => setSelectedProduct('lite')}
                 features={[
