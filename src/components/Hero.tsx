@@ -112,7 +112,7 @@ const Hero = () => {
             </h1>
             
             <div className="glass-card inline-block p-4 rounded-xl mb-8 bg-white/5">
-              <p className="text-white font-extrabold text-xl">Going to the vet sucks. Collie changes that.</p>
+              <p className="text-white font-extrabold text-xl">Collie keeps tabs on your dog's health 24/7, all in an AirTag sized module. Going to the vet sucks. We're changing that.</p>
               <p className="text-gray-300 text-sm mt-2">AirTag isn't built for dogs. Collie is.</p>
             </div>
 
