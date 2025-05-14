@@ -107,19 +107,19 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6 text-gray-900">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
               Collie: The World's Smartest Dog Collar
             </h1>
             
             <div className="glass-card inline-block p-4 rounded-xl mb-8 bg-white/5">
-              <p className="text-gray-900 font-extrabold text-xl">Going to the vet sucks. Collie changes that.</p>
-              <p className="text-gray-800 text-sm mt-2">AirTag isn't built for dogs. Collie is.</p>
+              <p className="text-white font-extrabold text-xl">Going to the vet sucks. Collie changes that.</p>
+              <p className="text-gray-300 text-sm mt-2">AirTag isn't built for dogs. Collie is.</p>
             </div>
 
             <form onSubmit={handleSubscribeSubmit} className="flex flex-col sm:flex-row gap-3">
               <div className="relative flex-grow">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail size={18} className="text-gray-800" />
+                  <Mail size={18} className="text-gray-400" />
                 </div>
                 <input
                   type="email"
@@ -128,7 +128,7 @@ const Hero = () => {
                   placeholder="Enter your email for updates"
                   required
                   disabled={status === 'submitting'}
-                  className="w-full bg-white/90 border border-gray-800 rounded-lg pl-10 pr-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-900 placeholder-gray-700 disabled:opacity-50"
+                  className="w-full bg-white/5 border border-white/10 rounded-lg pl-10 pr-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-white placeholder-gray-400 disabled:opacity-50"
                 />
               </div>
               <button
@@ -180,7 +180,7 @@ const Hero = () => {
               <ProductCard
                 title="Lite"
                 price="$29"
-                subscription="$3/mo for advanced analysis and vet connection"
+                subscription="$3/mo for AI analysis"
                 isSelected={selectedProduct === 'lite'}
                 onClick={() => setSelectedProduct('lite')}
                 features={[
@@ -222,7 +222,7 @@ const Hero = () => {
                   'Pre-Order Now ($20 Deposit)'
                 )}
               </button>
-              <p className="text-gray-800 text-sm">
+              <p className="text-sm text-gray-400">
                 Deposit will be applied to your choice of Lite or Pro at shipping
               </p>
 
@@ -244,11 +244,11 @@ const VitalStat = ({ icon, label, value, change }: { icon: React.ReactNode, labe
     <div className="glass-card p-4 rounded-xl">
       <div className="flex items-center space-x-3 mb-2">
         {icon}
-        <span className="text-sm font-medium text-gray-800">{label}</span>
+        <span className="text-sm font-medium text-gray-300">{label}</span>
       </div>
       <div className="flex justify-between items-end">
-        <span className="text-xl font-bold text-gray-900">{value}</span>
-        <span className="text-xs text-gray-800">{change}</span>
+        <span className="text-xl font-bold">{value}</span>
+        <span className="text-xs text-gray-400">{change}</span>
       </div>
     </div>
   );
@@ -274,15 +274,15 @@ const ProductCard = ({ title, price, subscription, isSelected, onClick, features
     }`}
   >
     <div className="flex items-center justify-between mb-2">
-      <h3 className="text-xl font-bold text-gray-900">{title}</h3>
+      <h3 className="text-xl font-bold">{title}</h3>
       <div className="text-2xl font-bold text-cyan-400">{price}</div>
     </div>
-    <p className="text-sm text-gray-800 mb-4">{subscription}</p>
+    <p className="text-sm text-gray-400 mb-4">{subscription}</p>
     <ul className="space-y-3 flex-grow">
       {features.map((feature, index) => (
         <li key={index} className="flex items-center gap-2 text-sm">
           <span className="text-cyan-400">{feature.icon}</span>
-          <span className="text-gray-800">{feature.text}</span>
+          <span className="text-gray-300">{feature.text}</span>
         </li>
       ))}
     </ul>
