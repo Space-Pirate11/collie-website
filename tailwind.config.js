@@ -4,21 +4,21 @@ export default {
   theme: {
     extend: {
       colors: {
-        charcoal: '#FFFFFF',
-        midnight: '#F8FAFC',
+        charcoal: '#0D0F12',
+        midnight: '#121620',
         cyan: {
-          400: '#0891B2',
-          500: '#0E7490',
-          600: '#155E75',
+          400: '#22D3EE',
+          500: '#06B6D4',
+          600: '#0891B2',
         },
         purple: {
-          400: '#8B5CF6',
-          500: '#7C3AED',
-          600: '#6D28D9',
-          700: '#5B21B6',
+          400: '#A78BFA',
+          500: '#8B5CF6',
+          600: '#7C3AED',
+          700: '#6D28D9',
         },
         success: {
-          50: '#F0FDF4',
+          50: '#ECFDF5',
           500: '#10B981',
           700: '#047857',
         },
